@@ -1,0 +1,8 @@
+#tag ColorGroup
+	CodeName=PVPBackgroundColorGroup
+	#tag Color
+		Type=2
+		Platform=3
+		Name=bootstrap|danger-bg-subtle
+	#tag EndColor
+#tag EndColorGroup

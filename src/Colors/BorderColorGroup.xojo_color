@@ -1,0 +1,8 @@
+#tag ColorGroup
+	CodeName=BorderColorGroup
+	#tag Color
+		Type=2
+		Platform=3
+		Name=bootstrap|border-color
+	#tag EndColor
+#tag EndColorGroup

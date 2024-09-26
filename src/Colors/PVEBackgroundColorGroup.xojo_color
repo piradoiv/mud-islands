@@ -1,0 +1,8 @@
+#tag ColorGroup
+	CodeName=PVEBackgroundColorGroup
+	#tag Color
+		Type=2
+		Platform=3
+		Name=bootstrap|success-bg-subtle
+	#tag EndColor
+#tag EndColorGroup
