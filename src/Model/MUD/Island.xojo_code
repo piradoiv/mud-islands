@@ -32,11 +32,58 @@ Protected Class Island
 		  
 		  Var zones As JSONItem = input.Lookup("zones", New JSONItem)
 		  For i As Integer = 0 To zones.LastRowIndex
-		    result.Zones.Add(MUD.Zone.FromJSON(zones.ValueAt(i)))
+		    Var newZone As MUD.Zone = MUD.Zone.FromJSON(zones.ValueAt(i))
+		    newZone.Island = result
+		    result.Zones.Add(newZone)
 		  Next
 		  
 		  Return result
 		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function GetRoomFromId(id As String) As MUD.Room
+		  For Each zone As MUD.Zone In Zones
+		    For Each room As MUD.Room In zone.Rooms
+		      If room.Id = id Then
+		        Return room
+		      End If
+		    Next
+		  Next
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function GetZoneFromId(id As String) As MUD.Zone
+		  For Each zone As MUD.Zone In Zones
+		    If zone.Id = id Then
+		      Return zone
+		    End If
+		  Next
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub MoveRoomToZone(roomId As String, newZoneId As String)
+		  Var room As MUD.Room = GetRoomFromId(roomId)
+		  Var oldZone As MUD.Zone = room.Zone
+		  Var newZone As MUD.Zone = GetZoneFromId(newZoneId)
+		  
+		  For i As Integer = oldZone.Rooms.LastIndex DownTo 0
+		    If oldZone.Rooms(i).Id = room.Id Then
+		      oldZone.Rooms.RemoveAt(i)
+		      Exit For
+		    End If
+		  Next
+		  
+		  For i As Integer = 0 To newZone.Rooms.LastIndex
+		    If newZone.Rooms(i).Id = room.Id Then
+		      Return
+		    End If
+		  Next
+		  
+		  newZone.Rooms.Add(room)
+		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
@@ -48,6 +95,34 @@ Protected Class Island
 		  Next
 		  
 		  Return result
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function RoomExists(x As Integer, y As Integer, z As Integer) As Boolean
+		  For Each zone As MUD.Zone In Zones
+		    For Each room As MUD.Room In Zone.Rooms
+		      If room.X = x And room.Y = y And room.Z = z Then
+		        Return True
+		      End If
+		    Next
+		  Next
+		  
+		  Return False
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function RoomHasLadders(x As Integer, y As Integer, z As Integer) As Boolean
+		  For Each zone As MUD.Zone In Zones
+		    For Each room As MUD.Room In zone.Rooms
+		      If room.X = x And room.Y = y And (room.Z = z - 1 Or room.Z = z + 1) Then
+		        Return True
+		      End If
+		    Next
+		  Next
+		  
+		  Return False
 		End Function
 	#tag EndMethod
 

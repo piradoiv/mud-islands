@@ -22,7 +22,7 @@ Begin WebDialog EditRoomWebDialog
    TabIndex        =   0
    Top             =   0
    Visible         =   True
-   Width           =   600
+   Width           =   708
    _mDesignHeight  =   0
    _mDesignWidth   =   0
    _mPanelIndex    =   -1
@@ -48,14 +48,14 @@ Begin WebDialog EditRoomWebDialog
       PanelCount      =   2
       PanelIndex      =   0
       Scope           =   2
-      SelectedPanelIndex=   3
+      SelectedPanelIndex=   1
       TabDefinition   =   "ID\rPosition\rEntities\rDelete"
       TabIndex        =   0
       TabStop         =   True
       Tooltip         =   ""
       Top             =   20
       Visible         =   True
-      Width           =   560
+      Width           =   668
       _mDesignHeight  =   0
       _mDesignWidth   =   0
       _mPanelIndex    =   -1
@@ -70,7 +70,7 @@ Begin WebDialog EditRoomWebDialog
          Height          =   62
          Hint            =   ""
          Index           =   -2147483648
-         indicator       =   0
+         Indicator       =   0
          Left            =   210
          LockBottom      =   False
          LockedInPosition=   False
@@ -85,13 +85,14 @@ Begin WebDialog EditRoomWebDialog
          ReadOnly        =   False
          Scope           =   2
          TabIndex        =   2
+         TabPanelIndex   =   0
          TabStop         =   True
          Text            =   ""
          TextAlignment   =   0
          Tooltip         =   ""
          Top             =   84
          Visible         =   True
-         Width           =   350
+         Width           =   458
          _mPanelIndex    =   -1
       End
       Begin WebTextArea DescriptionTextArea
@@ -119,13 +120,14 @@ Begin WebDialog EditRoomWebDialog
          ReadOnly        =   False
          Scope           =   2
          TabIndex        =   3
+         TabPanelIndex   =   0
          TabStop         =   True
          Text            =   ""
          TextAlignment   =   0
          Tooltip         =   ""
          Top             =   154
          Visible         =   True
-         Width           =   520
+         Width           =   628
          _mPanelIndex    =   -1
       End
       Begin WebTextField IdTextField
@@ -154,6 +156,7 @@ Begin WebDialog EditRoomWebDialog
          ReadOnly        =   False
          Scope           =   2
          TabIndex        =   0
+         TabPanelIndex   =   0
          TabStop         =   True
          Text            =   ""
          TextAlignment   =   0
@@ -175,7 +178,7 @@ Begin WebDialog EditRoomWebDialog
          Hint            =   ""
          Index           =   -2147483648
          Indicator       =   ""
-         Left            =   121
+         Left            =   337
          LockBottom      =   False
          LockedInPosition=   False
          LockHorizontal  =   False
@@ -189,11 +192,12 @@ Begin WebDialog EditRoomWebDialog
          ReadOnly        =   False
          Scope           =   2
          TabIndex        =   0
+         TabPanelIndex   =   0
          TabStop         =   True
          Text            =   ""
          TextAlignment   =   0
          Tooltip         =   ""
-         Top             =   84
+         Top             =   86
          Visible         =   True
          Width           =   100
          _mPanelIndex    =   -1
@@ -209,8 +213,8 @@ Begin WebDialog EditRoomWebDialog
          Height          =   62
          Hint            =   ""
          Index           =   -2147483648
-         indicator       =   0
-         Left            =   250
+         Indicator       =   0
+         Left            =   337
          LockBottom      =   False
          LockedInPosition=   False
          LockHorizontal  =   False
@@ -224,11 +228,12 @@ Begin WebDialog EditRoomWebDialog
          ReadOnly        =   False
          Scope           =   2
          TabIndex        =   0
+         TabPanelIndex   =   0
          TabStop         =   True
          Text            =   ""
          TextAlignment   =   0
          Tooltip         =   ""
-         Top             =   84
+         Top             =   169
          Visible         =   True
          Width           =   100
          _mPanelIndex    =   -1
@@ -244,8 +249,8 @@ Begin WebDialog EditRoomWebDialog
          Height          =   62
          Hint            =   ""
          Index           =   -2147483648
-         indicator       =   0
-         Left            =   378
+         Indicator       =   0
+         Left            =   337
          LockBottom      =   False
          LockedInPosition=   False
          LockHorizontal  =   False
@@ -259,11 +264,12 @@ Begin WebDialog EditRoomWebDialog
          ReadOnly        =   False
          Scope           =   2
          TabIndex        =   0
+         TabPanelIndex   =   0
          TabStop         =   True
          Text            =   ""
          TextAlignment   =   0
          Tooltip         =   ""
-         Top             =   84
+         Top             =   252
          Visible         =   True
          Width           =   100
          _mPanelIndex    =   -1
@@ -283,7 +289,7 @@ Begin WebDialog EditRoomWebDialog
          Indicator       =   ""
          LayoutDirection =   "LayoutDirections.LeftToRight"
          LayoutType      =   "LayoutTypes.Fixed"
-         Left            =   174
+         Left            =   40
          LockBottom      =   False
          LockedInPosition=   False
          LockHorizontal  =   False
@@ -295,6 +301,7 @@ Begin WebDialog EditRoomWebDialog
          Parent          =   "RoomTabPanel"
          Scope           =   2
          TabIndex        =   0
+         TabPanelIndex   =   0
          TabStop         =   True
          Tooltip         =   ""
          Top             =   189
@@ -311,8 +318,8 @@ Begin WebDialog EditRoomWebDialog
             Height          =   34
             Indeterminate   =   False
             Index           =   -2147483648
-            indicator       =   0
-            Left            =   202
+            Indicator       =   0
+            Left            =   68
             LockBottom      =   False
             LockedInPosition=   False
             LockHorizontal  =   False
@@ -324,6 +331,7 @@ Begin WebDialog EditRoomWebDialog
             Parent          =   "Rectangle1"
             Scope           =   2
             TabIndex        =   0
+            TabPanelIndex   =   0
             TabStop         =   True
             Tooltip         =   ""
             Top             =   257
@@ -341,7 +349,7 @@ Begin WebDialog EditRoomWebDialog
             Indeterminate   =   False
             Index           =   -2147483648
             Indicator       =   ""
-            Left            =   267
+            Left            =   133
             LockBottom      =   False
             LockedInPosition=   False
             LockHorizontal  =   False
@@ -353,6 +361,7 @@ Begin WebDialog EditRoomWebDialog
             Parent          =   "Rectangle1"
             Scope           =   2
             TabIndex        =   1
+            TabPanelIndex   =   0
             TabStop         =   True
             Tooltip         =   ""
             Top             =   207
@@ -369,8 +378,8 @@ Begin WebDialog EditRoomWebDialog
             Height          =   34
             Indeterminate   =   False
             Index           =   -2147483648
-            indicator       =   0
-            Left            =   329
+            Indicator       =   0
+            Left            =   195
             LockBottom      =   False
             LockedInPosition=   False
             LockHorizontal  =   False
@@ -382,6 +391,7 @@ Begin WebDialog EditRoomWebDialog
             Parent          =   "Rectangle1"
             Scope           =   2
             TabIndex        =   2
+            TabPanelIndex   =   0
             TabStop         =   True
             Tooltip         =   ""
             Top             =   257
@@ -398,8 +408,8 @@ Begin WebDialog EditRoomWebDialog
             Height          =   34
             Indeterminate   =   False
             Index           =   -2147483648
-            indicator       =   0
-            Left            =   267
+            Indicator       =   0
+            Left            =   133
             LockBottom      =   False
             LockedInPosition=   False
             LockHorizontal  =   False
@@ -411,6 +421,7 @@ Begin WebDialog EditRoomWebDialog
             Parent          =   "Rectangle1"
             Scope           =   2
             TabIndex        =   3
+            TabPanelIndex   =   0
             TabStop         =   True
             Tooltip         =   ""
             Top             =   306
@@ -431,7 +442,7 @@ Begin WebDialog EditRoomWebDialog
          Index           =   -2147483648
          Indicator       =   ""
          Italic          =   False
-         Left            =   176
+         Left            =   42
          LockBottom      =   False
          LockedInPosition=   False
          LockHorizontal  =   False
@@ -444,6 +455,7 @@ Begin WebDialog EditRoomWebDialog
          Parent          =   "RoomTabPanel"
          Scope           =   2
          TabIndex        =   0
+         TabPanelIndex   =   0
          TabStop         =   True
          Text            =   "Allowed to move"
          TextAlignment   =   0
@@ -480,13 +492,14 @@ Begin WebDialog EditRoomWebDialog
          ReadOnly        =   False
          Scope           =   2
          TabIndex        =   4
+         TabPanelIndex   =   0
          TabStop         =   True
          Text            =   ""
          TextAlignment   =   0
          Tooltip         =   ""
          Top             =   84
          Visible         =   True
-         Width           =   150
+         Width           =   200
          _mPanelIndex    =   -1
       End
       Begin WebTextArea EnemiesTextArea
@@ -499,8 +512,8 @@ Begin WebDialog EditRoomWebDialog
          Height          =   230
          Hint            =   ""
          Index           =   -2147483648
-         indicator       =   0
-         Left            =   225
+         Indicator       =   0
+         Left            =   254
          LockBottom      =   False
          LockedInPosition=   False
          LockHorizontal  =   False
@@ -514,13 +527,14 @@ Begin WebDialog EditRoomWebDialog
          ReadOnly        =   False
          Scope           =   2
          TabIndex        =   5
+         TabPanelIndex   =   0
          TabStop         =   True
          Text            =   ""
          TextAlignment   =   0
          Tooltip         =   ""
          Top             =   84
          Visible         =   True
-         Width           =   150
+         Width           =   200
          _mPanelIndex    =   -1
       End
       Begin WebTextArea CorpsesTextArea
@@ -533,8 +547,8 @@ Begin WebDialog EditRoomWebDialog
          Height          =   230
          Hint            =   ""
          Index           =   -2147483648
-         indicator       =   0
-         Left            =   410
+         Indicator       =   0
+         Left            =   468
          LockBottom      =   False
          LockedInPosition=   False
          LockHorizontal  =   False
@@ -548,13 +562,14 @@ Begin WebDialog EditRoomWebDialog
          ReadOnly        =   False
          Scope           =   2
          TabIndex        =   6
+         TabPanelIndex   =   0
          TabStop         =   True
          Text            =   ""
          TextAlignment   =   0
          Tooltip         =   ""
          Top             =   84
          Visible         =   True
-         Width           =   150
+         Width           =   200
          _mPanelIndex    =   -1
       End
       Begin WebLabel Label2
@@ -581,6 +596,7 @@ Begin WebDialog EditRoomWebDialog
          Parent          =   "RoomTabPanel"
          Scope           =   2
          TabIndex        =   0
+         TabPanelIndex   =   0
          TabStop         =   True
          Text            =   "One entity per line"
          TextAlignment   =   2
@@ -589,7 +605,7 @@ Begin WebDialog EditRoomWebDialog
          Top             =   328
          Underline       =   False
          Visible         =   True
-         Width           =   520
+         Width           =   628
          _mPanelIndex    =   -1
       End
       Begin WebButton DeleteRoomButton
@@ -603,7 +619,7 @@ Begin WebDialog EditRoomWebDialog
          Height          =   38
          Index           =   -2147483648
          Indicator       =   4
-         Left            =   186
+         Left            =   240
          LockBottom      =   False
          LockedInPosition=   False
          LockHorizontal  =   False
@@ -616,11 +632,79 @@ Begin WebDialog EditRoomWebDialog
          Parent          =   "RoomTabPanel"
          Scope           =   2
          TabIndex        =   9
+         TabPanelIndex   =   0
          TabStop         =   True
          Tooltip         =   ""
-         Top             =   205
+         Top             =   197
          Visible         =   True
          Width           =   228
+         _mPanelIndex    =   -1
+      End
+      Begin WebPopupMenu ZonePopupMenu
+         ControlID       =   ""
+         CSSClasses      =   ""
+         Enabled         =   True
+         Height          =   38
+         Index           =   -2147483648
+         Indicator       =   0
+         InitialValue    =   ""
+         LastAddedRowIndex=   0
+         LastRowIndex    =   0
+         Left            =   40
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockHorizontal  =   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         LockVertical    =   False
+         PanelIndex      =   1
+         Parent          =   "RoomTabPanel"
+         RowCount        =   0
+         Scope           =   2
+         SelectedRowIndex=   0
+         SelectedRowText =   ""
+         TabIndex        =   10
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   108
+         Visible         =   True
+         Width           =   251
+         _mPanelIndex    =   -1
+      End
+      Begin WebLabel Label3
+         Bold            =   False
+         ControlID       =   ""
+         CSSClasses      =   ""
+         Enabled         =   True
+         FontName        =   ""
+         FontSize        =   0.0
+         Height          =   38
+         Index           =   -2147483648
+         Indicator       =   ""
+         Italic          =   False
+         Left            =   40
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockHorizontal  =   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         LockVertical    =   False
+         Multiline       =   False
+         PanelIndex      =   1
+         Parent          =   "RoomTabPanel"
+         Scope           =   2
+         TabIndex        =   11
+         TabStop         =   True
+         Text            =   "Zone"
+         TextAlignment   =   0
+         TextColor       =   &c000000FF
+         Tooltip         =   ""
+         Top             =   74
+         Underline       =   False
+         Visible         =   True
+         Width           =   100
          _mPanelIndex    =   -1
       End
    End
@@ -635,7 +719,7 @@ Begin WebDialog EditRoomWebDialog
       Height          =   38
       Index           =   -2147483648
       Indicator       =   1
-      Left            =   480
+      Left            =   588
       LockBottom      =   True
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -721,6 +805,13 @@ End
 		  PosXTextField.Text = Room.X.ToString
 		  PosYTextField.Text = Room.Y.ToString
 		  PosZTextField.Text = Room.Z.ToString
+		  
+		  ZonePopupMenu.RemoveAllRows
+		  For Each zone As MUD.Zone In Room.Zone.Island.Zones
+		    ZonePopupMenu.AddRow(zone.Name, zone.Id)
+		  Next
+		  
+		  ZonePopupMenu.SelectRowWithTag(Room.Zone.Id)
 		End Sub
 	#tag EndMethod
 
@@ -795,6 +886,10 @@ End
 		  Room.X = PosXTextField.Text.Val
 		  Room.Y = PosYTextField.Text.Val
 		  Room.Z = PosZTextField.Text.Val
+		  
+		  If Room.Zone.Id <> ZonePopupMenu.RowTagAt(ZonePopupMenu.SelectedRowIndex) Then
+		    Room.Zone.Island.MoveRoomToZone(Room.Id, ZonePopupMenu.RowTagAt(ZonePopupMenu.SelectedRowIndex))
+		  End If
 		  
 		  RaiseEvent SavePressed
 		  

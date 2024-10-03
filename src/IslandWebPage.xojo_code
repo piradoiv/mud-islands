@@ -31,7 +31,6 @@ Begin WebPage IslandWebPage
    _ImplicitInstance=   False
    _mDesignHeight  =   0
    _mDesignWidth   =   0
-   _mName          =   ""
    _mPanelIndex    =   -1
    Begin WebRectangle RoomsRectangle
       BackgroundColor =   &cFFFFFF
@@ -301,10 +300,12 @@ End
 		  
 		  Var zone As MUD.Zone = Island.Zones(mCurrentZoneIndex)
 		  Var rooms() As MUD.Room
-		  For Each room As MUD.Room In zone.Rooms
-		    If room.Z = mZ Then
-		      rooms.Add(room)
-		    End If
+		  For Each currentZone As MUD.Zone In Island.Zones
+		    For Each room As MUD.Room In currentZone.Rooms
+		      If room.Z = mZ Then
+		        rooms.Add(room)
+		      End If
+		    Next
 		  Next
 		  
 		  Var testContainer As New IslandRoomContainer
@@ -350,7 +351,7 @@ End
 		    Var c As New IslandRoomContainer
 		    AddHandler c.Pressed, WeakAddressOf RoomPressedHandler
 		    c.Room = room
-		    c.HasLadder = zone.RoomHasLadders(room.X, room.Y, room.Z)
+		    c.HasLadder = Island.RoomHasLadders(room.X, room.Y, room.Z)
 		    SetBorders(c)
 		    c.EmbedWithin(RoomsRectangle, RoomsRectangle.Left + room.X * c.Width + offsetX, RoomsRectangle.Top + room.Y * c.Height + offsetY, c.Width, c.Height)
 		    mRoomContainers.Add(c)
@@ -436,16 +437,15 @@ End
 
 	#tag Method, Flags = &h21
 		Private Sub SetBorders(c As IslandRoomContainer)
-		  Var zone As MUD.Zone = Island.Zones(mCurrentZoneIndex)
 		  Var room As MUD.Room = c.Room
 		  
 		  Var x As Integer = room.X
 		  Var y As Integer = room.Y
 		  
-		  Var north As Boolean = zone.RoomExists(x, y - 1, mZ)
-		  Var south As Boolean = zone.RoomExists(x, y + 1, mZ)
-		  Var east As Boolean = zone.RoomExists(x + 1, y, mZ)
-		  Var west As Boolean = zone.RoomExists(x - 1, y, mZ)
+		  Var north As Boolean = Island.RoomExists(x, y - 1, mZ)
+		  Var south As Boolean = Island.RoomExists(x, y + 1, mZ)
+		  Var east As Boolean = Island.RoomExists(x + 1, y, mZ)
+		  Var west As Boolean = Island.RoomExists(x - 1, y, mZ)
 		  
 		  c.SetBorders(north, south, east, west)
 		End Sub
@@ -558,6 +558,7 @@ End
 		  Var newZone As New MUD.Zone
 		  newZone.Id = value.Lowercase.ReplaceAll(" ", "_")
 		  newZone.Name = value
+		  newZone.Island = Island
 		  
 		  Island.Zones.Add(newZone)
 		  mCurrentZoneIndex = Island.Zones.LastIndex
@@ -573,6 +574,7 @@ End
 		  newRoom.X = mNewRoomPosition.Left
 		  newRoom.Y = mNewRoomPosition.Right
 		  newRoom.Z = mZ
+		  newRoom.Zone = Island.Zones(mCurrentZoneIndex)
 		  Island.Zones(mCurrentZoneIndex).Rooms.Add(newRoom)
 		  
 		  Refresh

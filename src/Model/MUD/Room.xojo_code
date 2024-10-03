@@ -153,6 +153,10 @@ Protected Class Room
 		IsBoatLocation As Boolean = False
 	#tag EndProperty
 
+	#tag Property, Flags = &h21
+		Private mZone As WeakRef
+	#tag EndProperty
+
 	#tag Property, Flags = &h0
 		Name As String
 	#tag EndProperty
@@ -172,6 +176,22 @@ Protected Class Room
 	#tag Property, Flags = &h0
 		Z As Integer
 	#tag EndProperty
+
+	#tag ComputedProperty, Flags = &h0
+		#tag Getter
+			Get
+			  If mZone <> Nil And mZone.Value <> Nil Then
+			    Return MUD.Zone(mZone.Value)
+			  End If
+			End Get
+		#tag EndGetter
+		#tag Setter
+			Set
+			  mZone = New WeakRef(value)
+			End Set
+		#tag EndSetter
+		Zone As MUD.Zone
+	#tag EndComputedProperty
 
 
 	#tag ViewBehavior

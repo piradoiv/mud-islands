@@ -15,34 +15,12 @@ Protected Class Zone
 		  
 		  Var rooms As JSONItem = input.Lookup("rooms", New JSONItem)
 		  For i As Integer = 0 To rooms.LastRowIndex
-		    result.Rooms.Add(MUD.Room.FromJSON(rooms.ValueAt(i)))
+		    Var newRoom As MUD.Room = MUD.Room.FromJSON(rooms.ValueAt(i))
+		    newRoom.Zone = result
+		    result.Rooms.Add(newRoom)
 		  Next
 		  
 		  Return result
-		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Function RoomExists(x As Integer, y As Integer, z As Integer) As Boolean
-		  For Each room As MUD.Room In Rooms
-		    If room.X = x And room.Y = y And room.Z = z Then
-		      Return True
-		    End If
-		  Next
-		  
-		  Return False
-		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Function RoomHasLadders(x As Integer, y As Integer, z As Integer) As Boolean
-		  For Each room As MUD.Room In Rooms
-		    If room.X = x And room.Y = y And (room.Z = z - 1 Or room.Z = z + 1) Then
-		      Return True
-		    End If
-		  Next
-		  
-		  Return False
 		End Function
 	#tag EndMethod
 
@@ -73,6 +51,16 @@ Protected Class Zone
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Function ZoneColor() As Color
+		  Var zoneIndex As Integer = Island.Zones.IndexOf(Self)
+		  
+		  Var typeIndex As Integer = Integer(Self.Type)
+		  Var hue As Double = Abs(Sin(0.6 + typeIndex))
+		  Return Color.HSV(hue, 1, 1)
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Function ZRange() As Pair
 		  Var minZ As Integer
 		  Var maxZ As Integer
@@ -89,6 +77,26 @@ Protected Class Zone
 
 	#tag Property, Flags = &h0
 		Id As String
+	#tag EndProperty
+
+	#tag ComputedProperty, Flags = &h0
+		#tag Getter
+			Get
+			  If mIsland <> Nil And mIsland.Value <> Nil Then
+			    Return MUD.Island(mIsland.Value)
+			  End If
+			End Get
+		#tag EndGetter
+		#tag Setter
+			Set
+			  mIsland = New WeakRef(value)
+			End Set
+		#tag EndSetter
+		Island As MUD.Island
+	#tag EndComputedProperty
+
+	#tag Property, Flags = &h21
+		Private mIsland As WeakRef
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
@@ -166,7 +174,12 @@ Protected Class Zone
 			Group="Behavior"
 			InitialValue="MUD.Zone.Types.Unknown"
 			Type="MUD.Zone.Types"
-			EditorType=""
+			EditorType="Enum"
+			#tag EnumValues
+				"0 - Unknown"
+				"1 - PVP"
+				"2 - PVE"
+			#tag EndEnumValues
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class

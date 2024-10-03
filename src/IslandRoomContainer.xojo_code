@@ -34,7 +34,7 @@ Begin WebContainer IslandRoomContainer
       CornerSize      =   -1
       CSSClasses      =   ""
       Enabled         =   True
-      HasBackgroundColor=   False
+      HasBackgroundColor=   True
       Height          =   150
       Index           =   -2147483648
       Indicator       =   ""
@@ -91,6 +91,42 @@ Begin WebContainer IslandRoomContainer
          _mPanelIndex    =   -1
          _ProtectImage   =   False
       End
+      Begin WebRectangle ZoneRectangle
+         BackgroundColor =   &cFFFFFF
+         BorderColor     =   &c000000FF
+         BorderThickness =   0
+         ControlCount    =   0
+         ControlID       =   ""
+         CornerSize      =   100
+         CSSClasses      =   ""
+         Enabled         =   True
+         HasBackgroundColor=   True
+         Height          =   10
+         Index           =   -2147483648
+         Indicator       =   ""
+         LayoutDirection =   "LayoutDirections.LeftToRight"
+         LayoutType      =   "LayoutTypes.Fixed"
+         Left            =   70
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockHorizontal  =   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         LockVertical    =   False
+         PanelIndex      =   0
+         Parent          =   "BackgroundRectangle"
+         Scope           =   2
+         TabIndex        =   3
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   42
+         Visible         =   True
+         Width           =   10
+         _mDesignHeight  =   0
+         _mDesignWidth   =   0
+         _mPanelIndex    =   -1
+      End
       Begin WebLabel CaptionLabel
          Bold            =   False
          ControlID       =   ""
@@ -135,6 +171,8 @@ End
 	#tag Method, Flags = &h0
 		Sub Refresh()
 		  CaptionLabel.Text = room.Name + EndOfLine + "(" + room.X.ToString + ", " + room.Y.ToString + ", " + room.Z.ToString + ")"
+		  
+		  ZoneRectangle.BackgroundColor = room.Zone.ZoneColor
 		End Sub
 	#tag EndMethod
 
