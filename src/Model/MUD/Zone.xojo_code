@@ -25,6 +25,16 @@ Protected Class Zone
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Sub RemoveRoom(id As String)
+		  For i As Integer = Rooms.LastIndex DownTo 0
+		    If Rooms(i).Id = id Then
+		      Rooms.RemoveAt(i)
+		    End If
+		  Next
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Function ToJSON() As JSONItem
 		  Var result As New JSONItem
 		  

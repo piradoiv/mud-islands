@@ -83,7 +83,22 @@ Protected Class Island
 		  Next
 		  
 		  newZone.Rooms.Add(room)
+		  room.Zone = newZone
 		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function RoomAt(x As Integer, y As Integer, z As Integer) As MUD.Room
+		  For Each zone As MUD.Zone In Zones
+		    For Each room As MUD.Room In Zone.Rooms
+		      If room.X = x And room.Y = y And room.Z = z Then
+		        Return room
+		      End If
+		    Next
+		  Next
+		  
+		  Return Nil
+		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
@@ -100,15 +115,7 @@ Protected Class Island
 
 	#tag Method, Flags = &h0
 		Function RoomExists(x As Integer, y As Integer, z As Integer) As Boolean
-		  For Each zone As MUD.Zone In Zones
-		    For Each room As MUD.Room In Zone.Rooms
-		      If room.X = x And room.Y = y And room.Z = z Then
-		        Return True
-		      End If
-		    Next
-		  Next
-		  
-		  Return False
+		  Return RoomAt(x, y, z) <> Nil
 		End Function
 	#tag EndMethod
 

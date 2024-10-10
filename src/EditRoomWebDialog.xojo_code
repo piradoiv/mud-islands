@@ -48,7 +48,7 @@ Begin WebDialog EditRoomWebDialog
       PanelCount      =   2
       PanelIndex      =   0
       Scope           =   2
-      SelectedPanelIndex=   1
+      SelectedPanelIndex=   3
       TabDefinition   =   "ID\rPosition\rEntities\rDelete"
       TabIndex        =   0
       TabStop         =   True
@@ -665,6 +665,7 @@ Begin WebDialog EditRoomWebDialog
          SelectedRowIndex=   0
          SelectedRowText =   ""
          TabIndex        =   10
+         TabPanelIndex   =   0
          TabStop         =   True
          Tooltip         =   ""
          Top             =   108
@@ -696,6 +697,7 @@ Begin WebDialog EditRoomWebDialog
          Parent          =   "RoomTabPanel"
          Scope           =   2
          TabIndex        =   11
+         TabPanelIndex   =   0
          TabStop         =   True
          Text            =   "Zone"
          TextAlignment   =   0

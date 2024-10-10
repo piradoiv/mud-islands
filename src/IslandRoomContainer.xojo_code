@@ -118,6 +118,7 @@ Begin WebContainer IslandRoomContainer
          Parent          =   "BackgroundRectangle"
          Scope           =   2
          TabIndex        =   3
+         TabPanelIndex   =   0
          TabStop         =   True
          Tooltip         =   ""
          Top             =   42

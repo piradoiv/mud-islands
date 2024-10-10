@@ -281,7 +281,8 @@ End
 
 	#tag Method, Flags = &h21
 		Private Sub DeleteRoomPressedHandler(sender As EditRoomWebDialog)
-		  
+		  sender.Room.Zone.RemoveRoom(sender.Room.Id)
+		  Refresh
 		End Sub
 	#tag EndMethod
 
@@ -604,10 +605,7 @@ End
 	#tag EndEvent
 	#tag Event
 		Sub DeleteRoomPressed()
-		  Var index As Integer = Island.Zones(mCurrentZoneIndex).Rooms.IndexOf(Me.Room)
-		  If index >= 0 Then
-		    Island.Zones(mCurrentZoneIndex).Rooms.RemoveAt(index)
-		  End If
+		  Me.Room.Zone.RemoveRoom(Me.Room.Id)
 		  
 		  Refresh
 		End Sub

@@ -11,21 +11,6 @@ Protected Class Room
 		  result.Y = input.Lookup("y", 0)
 		  result.Z = input.Lookup("z", 0)
 		  
-		  Var exits As JSONItem = input.Lookup("exits", New JSONItem)
-		  Var exitIds() As String = Array(exits.Lookup("north", "").StringValue, _
-		  exits.Lookup("south", "").StringValue, _
-		  exits.Lookup("east", "").StringValue, _
-		  exits.Lookup("west", "").StringValue)
-		  Var exitEntities() As MUD.Entity
-		  For Each exitId As String In exitIds
-		    Var emptyEntity As MUD.Entity
-		    exitEntities.Add(If(exitId = "", emptyEntity, New MUD.Entity(exitId)))
-		  Next
-		  result.ExitNorth = exitEntities(0)
-		  result.ExitSouth = exitEntities(1)
-		  result.ExitEast = exitEntities(2)
-		  result.ExitWest = exitEntities(3)
-		  
 		  Var corpses As JSONItem = input.Lookup("corpses", New JSONItem)
 		  For i As Integer = 0 To corpses.LastRowIndex
 		    Var corpse As JSONItem = corpses.ValueAt(i)
@@ -68,17 +53,17 @@ Protected Class Room
 		  result.Value("z") = Z
 		  
 		  Var exitsItem As New JSONItem
-		  If ExitNorth <> Nil Then
-		    exitsItem.Value("north") = ExitNorth.Id
+		  If Zone.Island.RoomExists(X, Y - 1, Z) Then
+		    exitsItem.Value("north") = Zone.Island.RoomAt(X, Y - 1, Z).Id
 		  End If
-		  If ExitSouth <> Nil Then
-		    exitsItem.Value("south") = ExitSouth.Id
+		  If Zone.Island.RoomExists(X, Y + 1, Z) Then
+		    exitsItem.Value("south") = Zone.Island.RoomAt(X, Y + 1, Z).Id
 		  End If
-		  If ExitEast <> Nil Then
-		    exitsItem.Value("east") = ExitEast.Id
+		  If Zone.Island.RoomExists(X + 1, Y, Z) Then
+		    exitsItem.Value("east") = Zone.Island.RoomAt(X + 1, Y, Z).Id
 		  End If
-		  If ExitWest <> Nil Then
-		    exitsItem.Value("west") = ExitWest.Id
+		  If Zone.Island.RoomExists(X - 1, Y, Z) Then
+		    exitsItem.Value("west") = Zone.Island.RoomAt(X - 1, Y, Z).Id
 		  End If
 		  result.Value("exits") = exitsItem
 		  
@@ -127,22 +112,6 @@ Protected Class Room
 
 	#tag Property, Flags = &h0
 		Enemies() As MUD.Entity
-	#tag EndProperty
-
-	#tag Property, Flags = &h0
-		ExitEast As MUD.Entity
-	#tag EndProperty
-
-	#tag Property, Flags = &h0
-		ExitNorth As MUD.Entity
-	#tag EndProperty
-
-	#tag Property, Flags = &h0
-		ExitSouth As MUD.Entity
-	#tag EndProperty
-
-	#tag Property, Flags = &h0
-		ExitWest As MUD.Entity
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
