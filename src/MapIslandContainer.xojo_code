@@ -26,8 +26,8 @@ Begin WebContainer MapIslandContainer
    _mDesignWidth   =   0
    _mPanelIndex    =   -1
    Begin WebRectangle BackgroundRectangle
-      BackgroundColor =   &cFFFFFF
-      BorderColor     =   &c000000FF
+      BackgroundColor =   RectangleBackgroundColorGroup
+      BorderColor     =   RectangleBorderColorGroup
       BorderThickness =   1
       ControlCount    =   0
       ControlID       =   ""

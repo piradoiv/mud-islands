@@ -26,8 +26,8 @@ Begin WebContainer IslandRoomContainer
    _mDesignWidth   =   0
    _mPanelIndex    =   -1
    Begin WebRectangle BackgroundRectangle
-      BackgroundColor =   &cFFFFFF
-      BorderColor     =   &c00000000
+      BackgroundColor =   RectangleBackgroundColorGroup
+      BorderColor     =   RectangleBorderColorGroup
       BorderThickness =   2
       ControlCount    =   0
       ControlID       =   ""

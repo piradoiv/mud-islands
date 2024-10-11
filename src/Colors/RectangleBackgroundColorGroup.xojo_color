@@ -1,0 +1,8 @@
+#tag ColorGroup
+	CodeName=RectangleBackgroundColorGroup
+	#tag Color
+		Type=2
+		Platform=3
+		Name=bootstrap|body-bg
+	#tag EndColor
+#tag EndColorGroup
