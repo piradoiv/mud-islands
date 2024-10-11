@@ -140,7 +140,7 @@ Protected Class Island
 		  result.Value("id") = Id
 		  result.Value("name") = Name
 		  
-		  Var zonesItem As New JSONItem
+		  Var zonesItem As New JSONItem("[]")
 		  For Each zone As MUD.Zone In Zones
 		    zonesItem.Add(zone.ToJSON)
 		  Next

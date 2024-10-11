@@ -50,7 +50,7 @@ Protected Class Zone
 		  
 		  result.Value("name") = Name
 		  
-		  Var roomsItem As New JSONItem
+		  Var roomsItem As New JSONItem("[]")
 		  For Each room As MUD.Room In Rooms
 		    roomsItem.Add(room.ToJSON)
 		  Next

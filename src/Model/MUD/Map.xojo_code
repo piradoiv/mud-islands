@@ -18,7 +18,7 @@ Protected Class Map
 		Function ToJSON() As JSONItem
 		  Var result As New JSONItem
 		  
-		  Var islandsItem As New JSONItem
+		  Var islandsItem As New JSONItem("[]")
 		  For Each island As MUD.Island In Islands
 		    islandsItem.Add(island.ToJSON)
 		  Next

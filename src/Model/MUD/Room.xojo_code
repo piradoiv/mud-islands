@@ -67,19 +67,19 @@ Protected Class Room
 		  End If
 		  result.Value("exits") = exitsItem
 		  
-		  Var corpsesItem As New JSONItem
+		  Var corpsesItem As New JSONItem("[]")
 		  For Each corpse As MUD.Entity In Corpses
 		    corpsesItem.Add(corpse.ToJSON)
 		  Next
 		  result.Value("corpses") = corpsesItem
 		  
-		  Var npcsItem As New JSONItem
+		  Var npcsItem As New JSONItem("[]")
 		  For Each npc As MUD.Entity In NPCs
 		    npcsItem.Add(npc.ToJSON)
 		  Next
 		  result.Value("npcs") = npcsItem
 		  
-		  Var enemiesItem As New JSONItem
+		  Var enemiesItem As New JSONItem("[]")
 		  For Each enemy As MUD.Entity In Enemies
 		    enemiesItem.Add(enemy.ToJSON)
 		  Next
@@ -87,7 +87,7 @@ Protected Class Room
 		  
 		  result.Value("isBoatLocation") = IsBoatLocation
 		  
-		  Var connectedIslandsItem As New JSONItem
+		  Var connectedIslandsItem As New JSONItem("[]")
 		  For Each connectedIsland As MUD.Entity In ConnectedIslands
 		    connectedIslandsItem.Add(connectedIsland.Id)
 		  Next
