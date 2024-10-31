@@ -42,18 +42,6 @@ Protected Class Island
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function GetRoomFromId(id As String) As MUD.Room
-		  For Each zone As MUD.Zone In Zones
-		    For Each room As MUD.Room In zone.Rooms
-		      If room.Id = id Then
-		        Return room
-		      End If
-		    Next
-		  Next
-		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
 		Function GetZoneFromId(id As String) As MUD.Zone
 		  For Each zone As MUD.Zone In Zones
 		    If zone.Id = id Then
