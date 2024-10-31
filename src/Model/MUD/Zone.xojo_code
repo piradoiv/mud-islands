@@ -25,10 +25,12 @@ Protected Class Zone
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub RemoveRoom(id As String)
+		Sub RemoveRoomAt(x As Integer, y As Integer, z As Integer)
 		  For i As Integer = Rooms.LastIndex DownTo 0
-		    If Rooms(i).Id = id Then
+		    Var r As Room = Rooms(i)
+		    If r.X = x And r.Y = y And r.Z = z Then
 		      Rooms.RemoveAt(i)
+		      Return
 		    End If
 		  Next
 		End Sub

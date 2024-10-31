@@ -83,6 +83,7 @@ Begin WebContainer IslandAddRoomContainer
          Parent          =   "Rectangle1"
          Scope           =   2
          TabIndex        =   1
+         TabPanelIndex   =   0
          TabStop         =   True
          Text            =   "+"
          TextAlignment   =   2

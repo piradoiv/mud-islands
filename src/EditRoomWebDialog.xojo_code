@@ -890,7 +890,7 @@ End
 		  Room.Z = PosZTextField.Text.Val
 		  
 		  If Room.Zone.Id <> ZonePopupMenu.RowTagAt(ZonePopupMenu.SelectedRowIndex) Then
-		    Room.Zone.Island.MoveRoomToZone(Room.Id, ZonePopupMenu.RowTagAt(ZonePopupMenu.SelectedRowIndex))
+		    Room.Zone.Island.MoveRoomToZone(Room, ZonePopupMenu.RowTagAt(ZonePopupMenu.SelectedRowIndex))
 		  End If
 		  
 		  RaiseEvent SavePressed

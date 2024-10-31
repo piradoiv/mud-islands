@@ -64,20 +64,21 @@ Protected Class Island
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub MoveRoomToZone(roomId As String, newZoneId As String)
-		  Var room As MUD.Room = GetRoomFromId(roomId)
+		Sub MoveRoomToZone(room As MUD.Room, newZoneId As String)
 		  Var oldZone As MUD.Zone = room.Zone
 		  Var newZone As MUD.Zone = GetZoneFromId(newZoneId)
 		  
 		  For i As Integer = oldZone.Rooms.LastIndex DownTo 0
-		    If oldZone.Rooms(i).Id = room.Id Then
+		    Var oldRoom As MUD.Room = oldZone.Rooms(i)
+		    If oldRoom.X = room.X And oldRoom.Y = room.Y And oldRoom.Z = room.Z Then
 		      oldZone.Rooms.RemoveAt(i)
 		      Exit For
 		    End If
 		  Next
 		  
 		  For i As Integer = 0 To newZone.Rooms.LastIndex
-		    If newZone.Rooms(i).Id = room.Id Then
+		    Var newZoneRoom As MUD.Room = newZone.Rooms(i)
+		    If newZoneRoom.X = room.X And newZoneRoom.Y = room.Y And newZoneRoom.Z = room.Z Then
 		      Return
 		    End If
 		  Next

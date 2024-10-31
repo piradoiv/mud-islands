@@ -275,13 +275,23 @@ End
 	#tag Method, Flags = &h21
 		Private Sub CreateNewRoomHandler(sender As WebContainer, x As Integer, y As Integer)
 		  mNewRoomPosition = x : y
-		  CreateRoomWebDialog.Show
+		  
+		  Var newRoom As New MUD.Room
+		  newRoom.Name = x.ToString + "," + y.ToString
+		  newRoom.X = mNewRoomPosition.Left
+		  newRoom.Y = mNewRoomPosition.Right
+		  newRoom.Z = mZ
+		  newRoom.Zone = Island.Zones(mCurrentZoneIndex)
+		  Island.Zones(mCurrentZoneIndex).Rooms.Add(newRoom)
+		  
+		  Refresh
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
 		Private Sub DeleteRoomPressedHandler(sender As EditRoomWebDialog)
-		  sender.Room.Zone.RemoveRoom(sender.Room.Id)
+		  Var r As MUD.Room = sender.Room
+		  r.Zone.RemoveRoomAt(r.X, r.Y, r.Z)
 		  Refresh
 		End Sub
 	#tag EndMethod
@@ -570,18 +580,7 @@ End
 #tag Events CreateRoomWebDialog
 	#tag Event
 		Sub OkPressed(value As String)
-		  Var newRoom As New MUD.Room
-		  newRoom.Name = value
-		  newRoom.X = mNewRoomPosition.Left
-		  newRoom.Y = mNewRoomPosition.Right
-		  newRoom.Z = mZ
-		  newRoom.Zone = Island.Zones(mCurrentZoneIndex)
-		  Island.Zones(mCurrentZoneIndex).Rooms.Add(newRoom)
 		  
-		  Refresh
-		  
-		  EditRoomDialog.Room = newRoom
-		  EditRoomDialog.Show
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -605,7 +604,7 @@ End
 	#tag EndEvent
 	#tag Event
 		Sub DeleteRoomPressed()
-		  Me.Room.Zone.RemoveRoom(Me.Room.Id)
+		  Me.Room.Zone.RemoveRoomAt(Me.Room.X, Me.Room.Y, Me.Room.Z)
 		  
 		  Refresh
 		End Sub
