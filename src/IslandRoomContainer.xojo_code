@@ -59,6 +59,69 @@ Begin WebContainer IslandRoomContainer
       _mDesignHeight  =   0
       _mDesignWidth   =   0
       _mPanelIndex    =   -1
+      Begin WebCanvas DoorsCanvas
+         ControlID       =   ""
+         CSSClasses      =   ""
+         DiffEngineDisabled=   False
+         Enabled         =   True
+         Height          =   150
+         Index           =   -2147483648
+         Indicator       =   ""
+         Left            =   0
+         LockBottom      =   True
+         LockedInPosition=   False
+         LockHorizontal  =   False
+         LockLeft        =   True
+         LockRight       =   True
+         LockTop         =   True
+         LockVertical    =   False
+         PanelIndex      =   0
+         Parent          =   "BackgroundRectangle"
+         Scope           =   2
+         TabIndex        =   0
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   0
+         Visible         =   True
+         Width           =   150
+         _mPanelIndex    =   -1
+      End
+      Begin WebLabel CaptionLabel
+         Bold            =   False
+         ControlID       =   ""
+         CSSClasses      =   ""
+         Enabled         =   True
+         FontName        =   ""
+         FontSize        =   0.0
+         Height          =   110
+         Index           =   -2147483648
+         Indicator       =   ""
+         Italic          =   False
+         Left            =   20
+         LockBottom      =   True
+         LockedInPosition=   False
+         LockHorizontal  =   False
+         LockLeft        =   True
+         LockRight       =   True
+         LockTop         =   True
+         LockVertical    =   False
+         Multiline       =   True
+         PanelIndex      =   0
+         Parent          =   "BackgroundRectangle"
+         Scope           =   2
+         TabIndex        =   1
+         TabPanelIndex   =   0
+         TabStop         =   True
+         Text            =   "Untitled"
+         TextAlignment   =   2
+         TextColor       =   &c000000FF
+         Tooltip         =   ""
+         Top             =   20
+         Underline       =   False
+         Visible         =   True
+         Width           =   110
+         _mPanelIndex    =   -1
+      End
       Begin WebImageViewer LadderImageViewer
          ControlID       =   ""
          CSSClasses      =   ""
@@ -68,7 +131,7 @@ Begin WebContainer IslandRoomContainer
          Image           =   0
          Index           =   -2147483648
          Indicator       =   ""
-         Left            =   66
+         Left            =   52
          LockBottom      =   True
          LockedInPosition=   False
          LockHorizontal  =   False
@@ -84,7 +147,7 @@ Begin WebContainer IslandRoomContainer
          TabPanelIndex   =   0
          TabStop         =   True
          Tooltip         =   ""
-         Top             =   91
+         Top             =   112
          URL             =   ""
          Visible         =   True
          Width           =   18
@@ -101,12 +164,12 @@ Begin WebContainer IslandRoomContainer
          CSSClasses      =   ""
          Enabled         =   True
          HasBackgroundColor=   True
-         Height          =   10
+         Height          =   18
          Index           =   -2147483648
          Indicator       =   ""
          LayoutDirection =   "LayoutDirections.LeftToRight"
          LayoutType      =   "LayoutTypes.Fixed"
-         Left            =   70
+         Left            =   80
          LockBottom      =   False
          LockedInPosition=   False
          LockHorizontal  =   False
@@ -121,47 +184,11 @@ Begin WebContainer IslandRoomContainer
          TabPanelIndex   =   0
          TabStop         =   True
          Tooltip         =   ""
-         Top             =   42
+         Top             =   112
          Visible         =   True
-         Width           =   10
+         Width           =   18
          _mDesignHeight  =   0
          _mDesignWidth   =   0
-         _mPanelIndex    =   -1
-      End
-      Begin WebLabel CaptionLabel
-         Bold            =   False
-         ControlID       =   ""
-         CSSClasses      =   ""
-         Enabled         =   True
-         FontName        =   ""
-         FontSize        =   0.0
-         Height          =   150
-         Index           =   -2147483648
-         Indicator       =   ""
-         Italic          =   False
-         Left            =   0
-         LockBottom      =   True
-         LockedInPosition=   False
-         LockHorizontal  =   False
-         LockLeft        =   True
-         LockRight       =   True
-         LockTop         =   True
-         LockVertical    =   False
-         Multiline       =   False
-         PanelIndex      =   0
-         Parent          =   "BackgroundRectangle"
-         Scope           =   2
-         TabIndex        =   1
-         TabPanelIndex   =   0
-         TabStop         =   True
-         Text            =   "Untitled"
-         TextAlignment   =   2
-         TextColor       =   &c000000FF
-         Tooltip         =   ""
-         Top             =   0
-         Underline       =   False
-         Visible         =   True
-         Width           =   150
          _mPanelIndex    =   -1
       End
    End
@@ -257,6 +284,81 @@ End
 
 #tag EndWindowCode
 
+#tag Events DoorsCanvas
+	#tag Event
+		Sub Paint(g As WebGraphics)
+		  Const padding = 10
+		  
+		  If Room.IsHidden Then
+		    g.DrawingColor = Color.Yellow
+		    g.FillRectangle(0, 0, g.Width, g.Height)
+		  End If
+		  
+		  Var p As New Picture(1, 1)
+		  Var d As String = "🚪"
+		  Var w As Double = p.Graphics.TextWidth(d)
+		  Var h As Double = p.Graphics.TextHeight(d, 100)' + p.Graphics.FontAscent
+		  
+		  Var island As MUD.Island = Room.Zone.Island
+		  
+		  Var directions As Dictionary = Room.GetDirections
+		  For Each entry As DictionaryEntry In directions
+		    Select Case entry.Key
+		    Case "north"
+		      Var door As MUD.Door = island.GetDoorBetweenRooms(Room, MUD.Room(entry.Value))
+		      If door <> Nil Then
+		        g.DrawText(d, g.Width / 2 - w / 2, padding)
+		      End If
+		    Case "south"
+		      Var door As MUD.Door = island.GetDoorBetweenRooms(Room, MUD.Room(entry.Value))
+		      If door <> Nil Then
+		        g.DrawText(d, g.Width / 2 - w / 2, g.Height - padding * 2)
+		      End If
+		    Case "east"
+		      Var door As MUD.Door = island.GetDoorBetweenRooms(Room, MUD.Room(entry.Value))
+		      If door <> Nil Then
+		        g.DrawText(d, g.Width - padding * 2, g.Height / 2 + h / 2)
+		      End If
+		    Case "west"
+		      Var door As MUD.Door = island.GetDoorBetweenRooms(Room, MUD.Room(entry.Value))
+		      If door <> Nil Then
+		        g.DrawText(d, padding, g.Height / 2 + h / 2)
+		      End If
+		    Case "up"
+		      Var door As MUD.Door = island.GetDoorBetweenRooms(Room, MUD.Room(entry.Value))
+		      If door <> Nil Then
+		        g.DrawText(d, g.Width / 2 - w / 2, g.Height / 2 - padding * 4)
+		      End If
+		    Case "down"
+		      Var door As MUD.Door = island.GetDoorBetweenRooms(Room, MUD.Room(entry.Value))
+		      If door <> Nil Then
+		        g.DrawText(d, g.Width / 2 - w / 2, g.Height / 2 + padding * 4)
+		      End If
+		    Case "northwest"
+		      Var door As MUD.Door = island.GetDoorBetweenRooms(Room, MUD.Room(entry.Value))
+		      If door <> Nil Then
+		        g.DrawText(d, padding, padding)
+		      End If
+		    Case "northeast"
+		      Var door As MUD.Door = island.GetDoorBetweenRooms(Room, MUD.Room(entry.Value))
+		      If door <> Nil Then
+		        g.DrawText(d, g.Width - padding * 2, padding)
+		      End If
+		    Case "southwest"
+		      Var door As MUD.Door = island.GetDoorBetweenRooms(Room, MUD.Room(entry.Value))
+		      If door <> Nil Then
+		        g.DrawText(d, padding, g.Height - padding * 2)
+		      End If
+		    Case "southeast"
+		      Var door As MUD.Door = island.GetDoorBetweenRooms(Room, MUD.Room(entry.Value))
+		      If door <> Nil Then
+		        g.DrawText(d, g.Width - padding * 2, g.Height - padding * 2)
+		      End If
+		    End Select
+		  Next
+		End Sub
+	#tag EndEvent
+#tag EndEvents
 #tag Events CaptionLabel
 	#tag Event
 		Sub Pressed()

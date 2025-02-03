@@ -1,12 +1,19 @@
 #tag Class
 Protected Class Room
 	#tag Method, Flags = &h0
+		Function Doors() As MUD.Door()
+		  Return Zone.Island.GetDoorsForRoomId(Id)
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Shared Function FromJSON(input As JSONItem) As MUD.Room
 		  Var result As New Room
 		  
 		  result.Id = input.Lookup("id", "")
 		  result.Name = input.Lookup("name", "")
 		  result.Description = input.Lookup("description", "")
+		  result.IsHidden = input.Lookup("hidden", False)
 		  result.X = input.Lookup("x", 0)
 		  result.Y = input.Lookup("y", 0)
 		  result.Z = input.Lookup("z", 0)
@@ -37,7 +44,36 @@ Protected Class Room
 		    Next
 		  End If
 		  
+		  If input.HasKey("exits") Then
+		    result.Exits = input.Child("exits")
+		  End If
+		  
 		  Return result
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function GetDirections() As Dictionary
+		  Var directions As New Dictionary
+		  
+		  directions.Value("north") = Zone.Island.RoomAt(X, Y - 1, Z)
+		  directions.Value("south") = Zone.Island.RoomAt(X, Y + 1, Z)
+		  directions.Value("east") = Zone.Island.RoomAt(X + 1, Y, Z)
+		  directions.Value("west") = Zone.Island.RoomAt(X - 1, Y, Z)
+		  directions.Value("up") = Zone.Island.RoomAt(X, Y, Z + 1)
+		  directions.Value("down") = Zone.Island.RoomAt(X, Y, Z - 1)
+		  directions.Value("northwest") = Zone.Island.RoomAt(X - 1, Y - 1, Z)
+		  directions.Value("northeast") = Zone.Island.RoomAt(X + 1, Y - 1, Z)
+		  directions.Value("southwest") = Zone.Island.RoomAt(X - 1, Y + 1, Z)
+		  directions.Value("southeast") = Zone.Island.RoomAt(X + 1, Y + 1, Z)
+		  
+		  For Each key As String In directions.Keys
+		    If directions.Value(key) = Nil Then
+		      directions.Remove(key)
+		    End If
+		  Next
+		  
+		  Return directions
 		End Function
 	#tag EndMethod
 
@@ -48,23 +84,38 @@ Protected Class Room
 		  result.Value("id") = Id
 		  result.Value("name") = Name
 		  result.Value("description") = Description
+		  result.Value("hidden") = IsHidden
 		  result.Value("x") = X
 		  result.Value("y") = Y
 		  result.Value("z") = Z
 		  
+		  Var directions As Dictionary = GetDirections
+		  
+		  Var doors() As MUD.Door = Zone.Island.GetDoorsForRoomId(Id)
 		  Var exitsItem As New JSONItem
-		  If Zone.Island.RoomExists(X, Y - 1, Z) Then
-		    exitsItem.Value("north") = Zone.Island.RoomAt(X, Y - 1, Z).Id
-		  End If
-		  If Zone.Island.RoomExists(X, Y + 1, Z) Then
-		    exitsItem.Value("south") = Zone.Island.RoomAt(X, Y + 1, Z).Id
-		  End If
-		  If Zone.Island.RoomExists(X + 1, Y, Z) Then
-		    exitsItem.Value("east") = Zone.Island.RoomAt(X + 1, Y, Z).Id
-		  End If
-		  If Zone.Island.RoomExists(X - 1, Y, Z) Then
-		    exitsItem.Value("west") = Zone.Island.RoomAt(X - 1, Y, Z).Id
-		  End If
+		  
+		  For Each directionKey As String In directions.Keys
+		    Var r As MUD.Room = directions.Value(directionKey)
+		    If r = Nil Then
+		      Continue
+		    End If
+		    
+		    Var roomExit As New JSONItem
+		    roomExit.Value("room") = r.Id
+		    For Each door As MUD.Door In doors
+		      If door.RoomIds.IndexOf(r.Id) <> -1 And door.RoomIds.IndexOf(Self.Id) <> -1 Then
+		        roomExit.Value("door") = True
+		        roomExit.Value("locked") = door.Locked
+		        roomExit.Value("closed") = door.Closed
+		        roomExit.Value("key_id") = door.KeyId
+		        roomExit.Value("lock_message") = door.LockMessage
+		        roomExit.Value("auto_lock") = door.AutoLock
+		      End If
+		    Next
+		    
+		    exitsItem.Value(directionKey) = roomExit
+		  Next
+		  
 		  result.Value("exits") = exitsItem
 		  
 		  Var corpsesItem As New JSONItem("[]")
@@ -115,11 +166,19 @@ Protected Class Room
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
+		Exits As JSONItem
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
 		Id As String
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
 		IsBoatLocation As Boolean = False
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		IsHidden As Boolean = False
 	#tag EndProperty
 
 	#tag Property, Flags = &h21

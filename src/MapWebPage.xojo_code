@@ -23,6 +23,7 @@ Begin WebPage MapWebPage
    MinimumHeight   =   400
    MinimumWidth    =   600
    PanelIndex      =   0
+   ScaleFactor     =   0.0
    TabIndex        =   0
    Title           =   "MUD Islands Editor"
    Top             =   0
@@ -31,7 +32,6 @@ Begin WebPage MapWebPage
    _ImplicitInstance=   False
    _mDesignHeight  =   0
    _mDesignWidth   =   0
-   _mName          =   ""
    _mPanelIndex    =   -1
    Begin MapContainer MyMap
       ControlCount    =   0
@@ -227,6 +227,14 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="ScaleFactor"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Double"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="PanelIndex"
 		Visible=false

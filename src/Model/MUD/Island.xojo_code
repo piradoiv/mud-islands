@@ -24,17 +24,97 @@ Protected Class Island
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Sub Constructor()
+		  mDoors = New Dictionary
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Function DoorKeyForRooms(a As MUD.Room, b As MUD.Room) As String
+		  Var first, second As MUD.Room
+		  If b.X < a.X Or b.Y < a.Y Or b.Z < a.Z Then
+		    first = b
+		    second = a
+		  Else
+		    first = a
+		    second = b
+		  End If
+		  
+		  Var xKey As String = "X:" + first.X.ToString + "," + second.X.ToString
+		  Var yKey As String = "Y:" + first.Y.ToString + "," + second.Y.ToString
+		  Var zKey As String = "Z:" + first.Z.ToString + "," + second.Z.ToString
+		  
+		  Return xKey + "|" + yKey + "|" + zKey
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Shared Function FromJSON(input As JSONItem) As MUD.Island
 		  Var result As New MUD.Island
 		  
 		  result.Id = input.Lookup("id", "")
 		  result.Name = input.Lookup("name", "Untitled")
 		  
-		  Var zones As JSONItem = input.Lookup("zones", New JSONItem)
-		  For i As Integer = 0 To zones.LastRowIndex
-		    Var newZone As MUD.Zone = MUD.Zone.FromJSON(zones.ValueAt(i))
+		  Var jsonZones As JSONItem = input.Lookup("zones", New JSONItem)
+		  For i As Integer = 0 To jsonZones.LastRowIndex
+		    Var newZone As MUD.Zone = MUD.Zone.FromJSON(jsonZones.ValueAt(i))
 		    newZone.Island = result
 		    result.Zones.Add(newZone)
+		  Next
+		  
+		  For Each zone As MUD.Zone In result.Zones
+		    For Each room As MUD.Room In zone.Rooms
+		      If room.Exits = Nil Then
+		        Continue
+		      End If
+		      
+		      Var exitKeys() As String = room.Exits.Keys
+		      For i As Integer = 0 To exitKeys.LastRowIndex
+		        Var key As String = exitKeys(i)
+		        If Not room.Exits.Value(key) IsA JSONItem Then
+		          Continue
+		        End If
+		        
+		        Var roomExit As JSONItem = room.Exits.Child(key)
+		        If Not roomExit.HasKey("door") Or roomExit.Value("door") = False Then
+		          Continue
+		        End If
+		        
+		        Var door As MUD.Door = MUD.Door.FromJSON(room.Exits.Child(key))
+		        Var directions As Dictionary = room.GetDirections
+		        result.SetDoorBetweenRooms(room, MUD.Room(directions.Value(key)), door)
+		      Next
+		      
+		      room.Exits = Nil
+		    Next
+		  Next
+		  
+		  Return result
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function GetDoorBetweenRooms(a As MUD.Room, b As MUD.Room) As MUD.Door
+		  If a = Nil Or b = Nil Then
+		    Return Nil
+		  End If
+		  
+		  Var key As String = DoorKeyForRooms(a, b)
+		  If mDoors.HasKey(key) Then
+		    Return mDoors.Value(key)
+		  End If
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function GetDoorsForRoomId(id As String) As MUD.Door()
+		  Var result() As MUD.Door
+		  
+		  For Each entry As DictionaryEntry In mDoors
+		    Var door As MUD.Door = entry.Value
+		    If door.RoomIds.IndexOf(id) <> -1 Then
+		      result.Add(door)
+		    End If
 		  Next
 		  
 		  Return result
@@ -123,6 +203,26 @@ Protected Class Island
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Sub SetDoorBetweenRooms(a As MUD.Room, b As MUD.Room, door As MUD.Door)
+		  If a = Nil Or b = Nil Then
+		    Return
+		  End If
+		  
+		  Var key As String = DoorKeyForRooms(a, b)
+		  
+		  If door = Nil Then
+		    mDoors.Remove(key)
+		    Return
+		  End If
+		  
+		  door.RoomIds.RemoveAll
+		  door.RoomIds.Add(a.Id)
+		  door.RoomIds.Add(b.Id)
+		  mDoors.Value(key) = door
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Function ToJSON() As JSONItem
 		  Var result As New JSONItem
 		  
@@ -142,6 +242,10 @@ Protected Class Island
 
 	#tag Property, Flags = &h0
 		Id As String
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		Private mDoors As Dictionary
 	#tag EndProperty
 
 	#tag Property, Flags = &h0

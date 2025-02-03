@@ -48,8 +48,8 @@ Begin WebDialog EditRoomWebDialog
       PanelCount      =   2
       PanelIndex      =   0
       Scope           =   2
-      SelectedPanelIndex=   3
-      TabDefinition   =   "ID\rPosition\rEntities\rDelete"
+      SelectedPanelIndex=   1
+      TabDefinition   =   "ID\rPosition\rEntities\rConnected Rooms\rDelete"
       TabIndex        =   0
       TabStop         =   True
       Tooltip         =   ""
@@ -628,7 +628,7 @@ Begin WebDialog EditRoomWebDialog
          LockTop         =   True
          LockVertical    =   False
          Outlined        =   True
-         PanelIndex      =   3
+         PanelIndex      =   4
          Parent          =   "RoomTabPanel"
          Scope           =   2
          TabIndex        =   9
@@ -709,6 +709,391 @@ Begin WebDialog EditRoomWebDialog
          Width           =   100
          _mPanelIndex    =   -1
       End
+      Begin WebButton ConnectedRoomsButtons
+         AllowAutoDisable=   False
+         Cancel          =   False
+         Caption         =   "North"
+         ControlID       =   ""
+         CSSClasses      =   ""
+         Default         =   False
+         Enabled         =   True
+         Height          =   38
+         Index           =   0
+         Indicator       =   2
+         Left            =   304
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockHorizontal  =   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         LockVertical    =   False
+         Outlined        =   False
+         PanelIndex      =   3
+         Parent          =   "RoomTabPanel"
+         Scope           =   2
+         TabIndex        =   0
+         TabPanelIndex   =   0
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   143
+         Visible         =   True
+         Width           =   100
+         _mPanelIndex    =   -1
+      End
+      Begin WebButton ConnectedRoomsButtons
+         AllowAutoDisable=   False
+         Cancel          =   False
+         Caption         =   "South"
+         ControlID       =   ""
+         CSSClasses      =   ""
+         Default         =   False
+         Enabled         =   True
+         Height          =   38
+         Index           =   1
+         Indicator       =   2
+         Left            =   304
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockHorizontal  =   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         LockVertical    =   False
+         Outlined        =   False
+         PanelIndex      =   3
+         Parent          =   "RoomTabPanel"
+         Scope           =   2
+         TabIndex        =   1
+         TabPanelIndex   =   0
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   261
+         Visible         =   True
+         Width           =   100
+         _mPanelIndex    =   -1
+      End
+      Begin WebButton ConnectedRoomsButtons
+         AllowAutoDisable=   False
+         Cancel          =   False
+         Caption         =   "East"
+         ControlID       =   ""
+         CSSClasses      =   ""
+         Default         =   False
+         Enabled         =   True
+         Height          =   38
+         Index           =   2
+         Indicator       =   2
+         Left            =   518
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockHorizontal  =   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         LockVertical    =   False
+         Outlined        =   False
+         PanelIndex      =   3
+         Parent          =   "RoomTabPanel"
+         Scope           =   2
+         TabIndex        =   2
+         TabPanelIndex   =   0
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   202
+         Visible         =   True
+         Width           =   100
+         _mPanelIndex    =   -1
+      End
+      Begin WebButton ConnectedRoomsButtons
+         AllowAutoDisable=   False
+         Cancel          =   False
+         Caption         =   "West"
+         ControlID       =   ""
+         CSSClasses      =   ""
+         Default         =   False
+         Enabled         =   True
+         Height          =   38
+         Index           =   3
+         Indicator       =   2
+         Left            =   87
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockHorizontal  =   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         LockVertical    =   False
+         Outlined        =   False
+         PanelIndex      =   3
+         Parent          =   "RoomTabPanel"
+         Scope           =   2
+         TabIndex        =   3
+         TabPanelIndex   =   0
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   202
+         Visible         =   True
+         Width           =   100
+         _mPanelIndex    =   -1
+      End
+      Begin WebButton ConnectedRoomsButtons
+         AllowAutoDisable=   False
+         Cancel          =   False
+         Caption         =   "North West"
+         ControlID       =   ""
+         CSSClasses      =   ""
+         Default         =   False
+         Enabled         =   True
+         Height          =   38
+         Index           =   6
+         Indicator       =   2
+         Left            =   40
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockHorizontal  =   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         LockVertical    =   False
+         Outlined        =   False
+         PanelIndex      =   3
+         Parent          =   "RoomTabPanel"
+         Scope           =   2
+         TabIndex        =   6
+         TabPanelIndex   =   0
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   143
+         Visible         =   True
+         Width           =   150
+         _mPanelIndex    =   -1
+      End
+      Begin WebButton ConnectedRoomsButtons
+         AllowAutoDisable=   False
+         Cancel          =   False
+         Caption         =   "South West"
+         ControlID       =   ""
+         CSSClasses      =   ""
+         Default         =   False
+         Enabled         =   True
+         Height          =   38
+         Index           =   8
+         Indicator       =   2
+         Left            =   40
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockHorizontal  =   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         LockVertical    =   False
+         Outlined        =   False
+         PanelIndex      =   3
+         Parent          =   "RoomTabPanel"
+         Scope           =   2
+         TabIndex        =   8
+         TabPanelIndex   =   0
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   261
+         Visible         =   True
+         Width           =   150
+         _mPanelIndex    =   -1
+      End
+      Begin WebButton ConnectedRoomsButtons
+         AllowAutoDisable=   False
+         Cancel          =   False
+         Caption         =   "North East"
+         ControlID       =   ""
+         CSSClasses      =   ""
+         Default         =   False
+         Enabled         =   True
+         Height          =   38
+         Index           =   7
+         Indicator       =   2
+         Left            =   518
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockHorizontal  =   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         LockVertical    =   False
+         Outlined        =   False
+         PanelIndex      =   3
+         Parent          =   "RoomTabPanel"
+         Scope           =   2
+         TabIndex        =   7
+         TabPanelIndex   =   0
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   143
+         Visible         =   True
+         Width           =   150
+         _mPanelIndex    =   -1
+      End
+      Begin WebButton ConnectedRoomsButtons
+         AllowAutoDisable=   False
+         Cancel          =   False
+         Caption         =   "South East"
+         ControlID       =   ""
+         CSSClasses      =   ""
+         Default         =   False
+         Enabled         =   True
+         Height          =   38
+         Index           =   9
+         Indicator       =   2
+         Left            =   518
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockHorizontal  =   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         LockVertical    =   False
+         Outlined        =   False
+         PanelIndex      =   3
+         Parent          =   "RoomTabPanel"
+         Scope           =   2
+         TabIndex        =   9
+         TabPanelIndex   =   0
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   261
+         Visible         =   True
+         Width           =   150
+         _mPanelIndex    =   -1
+      End
+      Begin WebButton ConnectedRoomsButtons
+         AllowAutoDisable=   False
+         Cancel          =   False
+         Caption         =   "Up"
+         ControlID       =   ""
+         CSSClasses      =   ""
+         Default         =   False
+         Enabled         =   True
+         Height          =   38
+         Index           =   4
+         Indicator       =   2
+         Left            =   304
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockHorizontal  =   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         LockVertical    =   False
+         Outlined        =   False
+         PanelIndex      =   3
+         Parent          =   "RoomTabPanel"
+         Scope           =   2
+         TabIndex        =   4
+         TabPanelIndex   =   0
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   84
+         Visible         =   True
+         Width           =   100
+         _mPanelIndex    =   -1
+      End
+      Begin WebButton ConnectedRoomsButtons
+         AllowAutoDisable=   False
+         Cancel          =   False
+         Caption         =   "Down"
+         ControlID       =   ""
+         CSSClasses      =   ""
+         Default         =   False
+         Enabled         =   True
+         Height          =   38
+         Index           =   5
+         Indicator       =   2
+         Left            =   304
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockHorizontal  =   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         LockVertical    =   False
+         Outlined        =   False
+         PanelIndex      =   3
+         Parent          =   "RoomTabPanel"
+         Scope           =   2
+         TabIndex        =   5
+         TabPanelIndex   =   0
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   320
+         Visible         =   True
+         Width           =   100
+         _mPanelIndex    =   -1
+      End
+      Begin WebLabel RoomNameLabel
+         Bold            =   False
+         ControlID       =   ""
+         CSSClasses      =   ""
+         Enabled         =   True
+         FontName        =   ""
+         FontSize        =   0.0
+         Height          =   38
+         Index           =   -2147483648
+         Indicator       =   ""
+         Italic          =   False
+         Left            =   198
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockHorizontal  =   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         LockVertical    =   False
+         Multiline       =   False
+         PanelIndex      =   3
+         Parent          =   "RoomTabPanel"
+         Scope           =   2
+         TabIndex        =   12
+         TabPanelIndex   =   0
+         TabStop         =   True
+         Text            =   "Untitled"
+         TextAlignment   =   2
+         TextColor       =   &c000000FF
+         Tooltip         =   ""
+         Top             =   202
+         Underline       =   False
+         Visible         =   True
+         Width           =   312
+         _mPanelIndex    =   -1
+      End
+      Begin WebCheckbox HiddenCheckbox
+         Caption         =   "Hidden"
+         ControlID       =   ""
+         CSSClasses      =   ""
+         Enabled         =   True
+         Height          =   34
+         Indeterminate   =   False
+         Index           =   -2147483648
+         Indicator       =   ""
+         Left            =   465
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockHorizontal  =   False
+         LockLeft        =   True
+         LockRight       =   True
+         LockTop         =   True
+         LockVertical    =   False
+         PanelIndex      =   1
+         Parent          =   "RoomTabPanel"
+         Scope           =   2
+         TabIndex        =   13
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   86
+         Value           =   False
+         Visible         =   True
+         Width           =   203
+         _mPanelIndex    =   -1
+      End
    End
    Begin WebButton SaveButton
       AllowAutoDisable=   False
@@ -782,6 +1167,24 @@ End
 
 
 	#tag Method, Flags = &h21
+		Private Sub DoorSavedHandler(sender As DoorEditorContainer, door As MUD.Door)
+		  Var anotherRoom As MUD.Room = GetRoomAtDirectionIndex(mEditingDoorIndex)
+		  Room.Zone.Island.SetDoorBetweenRooms(Room, anotherRoom, door)
+		  
+		  RefreshConnectedRooms
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Function GetRoomAtDirectionIndex(index As Integer) As MUD.Room
+		  Var directions As Dictionary = Room.GetDirections
+		  Var keys() As String = Array("north", "south", "east", "west", "up", "down", "northwest", "northeast", "southwest", "southeast")
+		  
+		  Return directions.Lookup(keys(index), Nil)
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
 		Private Sub Refresh()
 		  CorpsesTextArea.Text = ""
 		  For Each corpse As MUD.Entity In Room.Corpses
@@ -814,6 +1217,37 @@ End
 		  Next
 		  
 		  ZonePopupMenu.SelectRowWithTag(Room.Zone.Id)
+		  RefreshConnectedRooms
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Sub RefreshConnectedRooms()
+		  RoomNameLabel.Text = Room.Name
+		  
+		  Var directions As Dictionary = Room.GetDirections
+		  Var keys() As String = Array("north", "south", "east", "west", "up", "down", "northwest", "northeast", "southwest", "southeast")
+		  Var doors() As MUD.Door = Room.Doors
+		  
+		  For i As Integer = 0 To keys.LastIndex
+		    Var key As String = keys(i)
+		    Var b As WebButton = ConnectedRoomsButtons(i)
+		    If directions.HasKey(key) Then
+		      Var r As MUD.Room = directions.Value(key)
+		      b.Enabled = True
+		      b.Tooltip = r.Name
+		      b.Indicator = WebUIControl.Indicators.Success
+		      For Each door As MUD.Door In doors
+		        If door.RoomIds.IndexOf(r.Id) <> -1 Then
+		          b.Indicator = If(door.Locked, WebUIControl.Indicators.Danger, WebUIControl.Indicators.Warning)
+		        End If
+		      Next
+		    Else
+		      ConnectedRoomsButtons(i).Enabled = False
+		      b.Tooltip = ""
+		      b.Indicator = WebUIControl.Indicators.Secondary
+		    End If
+		  Next
 		End Sub
 	#tag EndMethod
 
@@ -826,6 +1260,14 @@ End
 		Event SavePressed()
 	#tag EndHook
 
+
+	#tag Property, Flags = &h21
+		Private mDoorEditorContainer As DoorEditorContainer
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		Private mEditingDoorIndex As Integer
+	#tag EndProperty
 
 	#tag Property, Flags = &h21
 		Private mRoom As MUD.Room
@@ -850,6 +1292,15 @@ End
 
 #tag EndWindowCode
 
+#tag Events RoomTabPanel
+	#tag Event
+		Sub PanelChanged()
+		  If Me.SelectedPanelIndex = 3 Then
+		    RefreshConnectedRooms
+		  End If
+		End Sub
+	#tag EndEvent
+#tag EndEvents
 #tag Events DeleteRoomButton
 	#tag Event
 		Sub Pressed()
@@ -857,6 +1308,22 @@ End
 		  
 		  mRoom = Nil
 		  Self.Close
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events ConnectedRoomsButtons
+	#tag Event
+		Sub Pressed(index as Integer)
+		  mEditingDoorIndex = index
+		  
+		  Var existingDoor As MUD.Door = Room.Zone.Island.GetDoorBetweenRooms(Room, GetRoomAtDirectionIndex(index))
+		  
+		  Var c As New DoorEditorContainer
+		  c.LoadDoor(existingDoor)
+		  AddHandler c.DoorSaved, WeakAddressOf DoorSavedHandler
+		  c.ShowPopover(Me)
+		  
+		  mDoorEditorContainer = c
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -888,6 +1355,7 @@ End
 		  Room.X = PosXTextField.Text.Val
 		  Room.Y = PosYTextField.Text.Val
 		  Room.Z = PosZTextField.Text.Val
+		  Room.IsHidden = HiddenCheckbox.Value
 		  
 		  If Room.Zone.Id <> ZonePopupMenu.RowTagAt(ZonePopupMenu.SelectedRowIndex) Then
 		    Room.Zone.Island.MoveRoomToZone(Room, ZonePopupMenu.RowTagAt(ZonePopupMenu.SelectedRowIndex))

@@ -1,6 +1,5 @@
 #tag WebPage
 Begin WebPage IslandWebPage
-   AllowTabOrderWrap=   True
    Compatibility   =   ""
    ControlCount    =   0
    ControlID       =   ""
@@ -23,6 +22,7 @@ Begin WebPage IslandWebPage
    MinimumHeight   =   400
    MinimumWidth    =   600
    PanelIndex      =   0
+   ScaleFactor     =   0.0
    TabIndex        =   0
    Title           =   "Untitled"
    Top             =   0
@@ -611,6 +611,14 @@ End
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior
+	#tag ViewProperty
+		Name="ScaleFactor"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Double"
+		EditorType=""
+	#tag EndViewProperty
 	#tag ViewProperty
 		Name="PanelIndex"
 		Visible=false
