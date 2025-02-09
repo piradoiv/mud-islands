@@ -305,23 +305,6 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
-		Private Sub DeleteRoomPressedHandler(sender As EditRoomWebDialog)
-		  Var r As MUD.Room = sender.Room
-		  r.Zone.RemoveRoomAt(r.X, r.Y, r.Z)
-		  
-		  For i As Integer = 0 To mRoomContainers.LastIndex
-		    If sender = mRoomContainers(i) Then
-		      mRoomContainers.RemoveAt(i)
-		      Exit
-		    End If
-		  Next
-		  sender.Close
-		  
-		  Refresh
-		End Sub
-	#tag EndMethod
-
-	#tag Method, Flags = &h21
 		Private Sub DrawRoomContainers()
 		  Const defaultValue = -9999
 		  Var grid As New Dictionary
@@ -673,6 +656,14 @@ End
 	#tag Event
 		Sub DeleteRoomPressed()
 		  Me.Room.Zone.RemoveRoomAt(Me.Room.X, Me.Room.Y, Me.Room.Z)
+		  
+		  For i As Integer = 0 To mRoomContainers.LastIndex
+		    If Me.Room = mRoomContainers(i).Room Then
+		      mRoomContainers(i).Close
+		      mRoomContainers.RemoveAt(i)
+		      Exit
+		    End If
+		  Next
 		  
 		  Refresh
 		End Sub

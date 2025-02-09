@@ -1242,6 +1242,7 @@ End
 		  PosXTextField.Text = Room.X.ToString
 		  PosYTextField.Text = Room.Y.ToString
 		  PosZTextField.Text = Room.Z.ToString
+		  HiddenCheckbox.Value = Room.IsHidden
 		  
 		  ZonePopupMenu.RemoveAllRows
 		  For Each zone As MUD.Zone In Room.Zone.Island.Zones
