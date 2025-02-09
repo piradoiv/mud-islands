@@ -5,7 +5,7 @@ Begin WebContainer DoorEditorContainer
    ControlID       =   ""
    CSSClasses      =   ""
    Enabled         =   True
-   Height          =   356
+   Height          =   418
    Indicator       =   0
    LayoutDirection =   0
    LayoutType      =   0
@@ -128,10 +128,10 @@ Begin WebContainer DoorEditorContainer
       LockVertical    =   False
       PanelIndex      =   0
       Scope           =   2
-      TabIndex        =   4
+      TabIndex        =   5
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   238
+      Top             =   303
       Value           =   True
       Visible         =   True
       Width           =   210
@@ -193,10 +193,10 @@ Begin WebContainer DoorEditorContainer
       Outlined        =   False
       PanelIndex      =   0
       Scope           =   2
-      TabIndex        =   5
+      TabIndex        =   6
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   298
+      Top             =   360
       Visible         =   True
       Width           =   87
       _mPanelIndex    =   -1
@@ -223,12 +223,46 @@ Begin WebContainer DoorEditorContainer
       Outlined        =   False
       PanelIndex      =   0
       Scope           =   2
-      TabIndex        =   6
+      TabIndex        =   7
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   298
+      Top             =   360
       Visible         =   True
       Width           =   115
+      _mPanelIndex    =   -1
+   End
+   Begin WebTextField KeyIdTextField
+      AllowAutoComplete=   False
+      AllowSpellChecking=   False
+      Caption         =   "Key ID:"
+      ControlID       =   ""
+      CSSClasses      =   ""
+      Enabled         =   True
+      FieldType       =   0
+      Height          =   62
+      Hint            =   ""
+      Index           =   -2147483648
+      indicator       =   0
+      Left            =   20
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockHorizontal  =   False
+      LockLeft        =   True
+      LockRight       =   True
+      LockTop         =   True
+      LockVertical    =   False
+      MaximumCharactersAllowed=   0
+      PanelIndex      =   0
+      ReadOnly        =   False
+      Scope           =   2
+      TabIndex        =   4
+      TabStop         =   True
+      Text            =   ""
+      TextAlignment   =   0
+      Tooltip         =   ""
+      Top             =   233
+      Visible         =   True
+      Width           =   210
       _mPanelIndex    =   -1
    End
 End
@@ -244,6 +278,7 @@ End
 
 	#tag Method, Flags = &h0
 		Sub LoadDoor(door As MUD.Door)
+		  Reset
 		  If door = Nil Then
 		    HasDoorCheckbox.Value = False
 		    Return
@@ -254,6 +289,7 @@ End
 		  ClosedCheckbox.Value = door.Closed
 		  LockedCheckbox.Value = door.Locked
 		  LockMessageTextField.Text = door.LockMessage
+		  KeyIdTextField.Text = door.KeyId
 		  
 		  Refresh
 		End Sub
@@ -266,11 +302,27 @@ End
 		  AutoLockCheckbox.Enabled = enableOthers
 		  ClosedCheckbox.Enabled = enableOthers
 		  LockedCheckbox.Enabled = enableOthers
+		  KeyIdTextField.Enabled = enableOthers
 		  
 		  LockMessageTextField.Enabled = enableOthers And LockedCheckbox.Value
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h21
+		Private Sub Reset()
+		  HasDoorCheckbox.Value = False
+		  ClosedCheckbox.Value = True
+		  LockedCheckbox.Value = False
+		  LockMessageTextField.Text = ""
+		  KeyIdTextField.Text = ""
+		  AutoLockCheckbox.Value = True
+		End Sub
+	#tag EndMethod
+
+
+	#tag Hook, Flags = &h0
+		Event CancelPressed()
+	#tag EndHook
 
 	#tag Hook, Flags = &h0
 		Event DoorSaved(door As MUD.Door)
@@ -296,7 +348,7 @@ End
 #tag Events CancelButton
 	#tag Event
 		Sub Pressed()
-		  Self.Close
+		  RaiseEvent CancelPressed
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -311,10 +363,10 @@ End
 		    door.Closed = ClosedCheckbox.Value
 		    door.Locked = LockedCheckbox.Value
 		    door.LockMessage = LockMessageTextField.Text
+		    door.KeyId = KeyIdTextField.Text
 		  End If
 		  
 		  RaiseEvent DoorSaved(door)
-		  Self.Close
 		End Sub
 	#tag EndEvent
 #tag EndEvents

@@ -160,6 +160,13 @@ End
 #tag EndWebPage
 
 #tag WindowCode
+	#tag Event
+		Sub Opening()
+		  Me.Style.BackgroundColor = WaterColorGroup
+		End Sub
+	#tag EndEvent
+
+
 	#tag Property, Flags = &h21
 		Private mExportFile As WebFile
 	#tag EndProperty

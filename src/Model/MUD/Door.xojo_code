@@ -14,6 +14,12 @@ Protected Class Door
 		End Function
 	#tag EndMethod
 
+	#tag Method, Flags = &h0
+		Function ToPicture() As WebPicture
+		  Return doorclosedfill
+		End Function
+	#tag EndMethod
+
 
 	#tag Property, Flags = &h0
 		AutoLock As Boolean = True

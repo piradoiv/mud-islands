@@ -48,7 +48,7 @@ Begin WebDialog EditRoomWebDialog
       PanelCount      =   2
       PanelIndex      =   0
       Scope           =   2
-      SelectedPanelIndex=   1
+      SelectedPanelIndex=   3
       TabDefinition   =   "ID\rPosition\rEntities\rConnected Rooms\rDelete"
       TabIndex        =   0
       TabStop         =   True
@@ -1086,6 +1086,7 @@ Begin WebDialog EditRoomWebDialog
          Parent          =   "RoomTabPanel"
          Scope           =   2
          TabIndex        =   13
+         TabPanelIndex   =   0
          TabStop         =   True
          Tooltip         =   ""
          Top             =   86
@@ -1153,6 +1154,37 @@ Begin WebDialog EditRoomWebDialog
       Top             =   404
       Visible         =   True
       Width           =   100
+      _mPanelIndex    =   -1
+   End
+   Begin DoorEditorWebDialog DoorEditorDialog
+      ControlCount    =   0
+      ControlID       =   ""
+      CSSClasses      =   ""
+      Enabled         =   True
+      Height          =   418
+      Index           =   -2147483648
+      Indicator       =   0
+      LayoutDirection =   0
+      LayoutType      =   0
+      Left            =   0
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockHorizontal  =   False
+      LockLeft        =   False
+      LockRight       =   False
+      LockTop         =   False
+      LockVertical    =   False
+      PanelIndex      =   0
+      Position        =   0
+      Scope           =   2
+      TabIndex        =   14
+      TabStop         =   True
+      Tooltip         =   ""
+      Top             =   0
+      Visible         =   True
+      Width           =   250
+      _mDesignHeight  =   0
+      _mDesignWidth   =   0
       _mPanelIndex    =   -1
    End
 End
@@ -1314,16 +1346,23 @@ End
 #tag Events ConnectedRoomsButtons
 	#tag Event
 		Sub Pressed(index as Integer)
+		  // mEditingDoorIndex = index
+		  // 
+		  // Var existingDoor As MUD.Door = Room.Zone.Island.GetDoorBetweenRooms(Room, GetRoomAtDirectionIndex(index))
+		  // 
+		  // Var c As New DoorEditorContainer
+		  // c.LoadDoor(existingDoor)
+		  // AddHandler c.DoorSaved, WeakAddressOf DoorSavedHandler
+		  // c.ShowPopover(Me)
+		  // 
+		  // mDoorEditorContainer = c
+		  
+		  
 		  mEditingDoorIndex = index
 		  
 		  Var existingDoor As MUD.Door = Room.Zone.Island.GetDoorBetweenRooms(Room, GetRoomAtDirectionIndex(index))
-		  
-		  Var c As New DoorEditorContainer
-		  c.LoadDoor(existingDoor)
-		  AddHandler c.DoorSaved, WeakAddressOf DoorSavedHandler
-		  c.ShowPopover(Me)
-		  
-		  mDoorEditorContainer = c
+		  DoorEditorDialog.LoadDoor(existingDoor)
+		  DoorEditorDialog.Show
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -1371,6 +1410,16 @@ End
 	#tag Event
 		Sub Pressed()
 		  Self.Close
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events DoorEditorDialog
+	#tag Event
+		Sub DoorSaved(door As MUD.Door)
+		  Var anotherRoom As MUD.Room = GetRoomAtDirectionIndex(mEditingDoorIndex)
+		  Room.Zone.Island.SetDoorBetweenRooms(Room, anotherRoom, door)
+		  
+		  RefreshConnectedRooms
 		End Sub
 	#tag EndEvent
 #tag EndEvents

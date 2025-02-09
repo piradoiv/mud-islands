@@ -172,7 +172,7 @@ End
 		    positions.Add(New Point(x, y))
 		  Next
 		  
-		  g.DrawingColor = RectangleBorderColorGroup
+		  g.DrawingColor = TextBodyColorGroup
 		  For i As Integer = 0 To positions.LastIndex
 		    Var position As Point = positions(i)
 		    

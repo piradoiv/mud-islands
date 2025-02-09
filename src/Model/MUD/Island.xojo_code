@@ -32,12 +32,25 @@ Protected Class Island
 	#tag Method, Flags = &h21
 		Private Function DoorKeyForRooms(a As MUD.Room, b As MUD.Room) As String
 		  Var first, second As MUD.Room
-		  If b.X < a.X Or b.Y < a.Y Or b.Z < a.Z Then
-		    first = b
-		    second = a
-		  Else
+		  
+		  If a.Z > b.Z Then
 		    first = a
 		    second = b
+		  ElseIf b.Z > a.Z Then
+		    first = b
+		    second = a
+		  ElseIf a.Y > b.Y Then
+		    first = a
+		    second = b
+		  ElseIf b.Y > a.Y Then
+		    first = b
+		    second = a
+		  ElseIf a.X > b.X Then
+		    first = a
+		    second = b
+		  Else
+		    first = b
+		    second = a
 		  End If
 		  
 		  Var xKey As String = "X:" + first.X.ToString + "," + second.X.ToString

@@ -1,5 +1,6 @@
 #tag WebPage
 Begin WebPage IslandWebPage
+   AllowTabOrderWrap=   True
    Compatibility   =   ""
    ControlCount    =   0
    ControlID       =   ""
@@ -261,6 +262,7 @@ End
 #tag WindowCode
 	#tag Event
 		Sub Opening()
+		  Me.Style.BackgroundColor = WaterColorGroup
 		  Refresh
 		End Sub
 	#tag EndEvent
@@ -300,6 +302,11 @@ End
 		Private Sub DrawRoomContainers()
 		  Const defaultValue = -9999
 		  Var grid As New Dictionary
+		  
+		  For Each c As WebContainer In mRoomContainers
+		    c.Close
+		  Next
+		  mRoomContainers.RemoveAll
 		  
 		  If mCurrentZoneIndex > Island.Zones.LastIndex Then
 		    Return
@@ -372,7 +379,8 @@ End
 		  Next
 		  
 		  For Each room As MUD.Room In rooms
-		    Var positions() As Pair = Array(room.X : room.Y - 1, room.X : room.Y + 1, room.X + 1 : room.Y, room.X - 1 : room.Y)
+		    Var positions() As Pair = Array(room.X : room.Y - 1, room.X : room.Y + 1, room.X + 1 : room.Y, room.X - 1 : room.Y, _
+		    room.X - 1 : room.Y - 1, room.X + 1 : room.Y - 1, room.X - 1 : room.Y + 1, room.X + 1 : room.Y + 1)
 		    For Each position As Pair In positions
 		      Var key As String = position.Left.StringValue + "-" + position.Right.StringValue
 		      If Not grid.HasKey(key) Then
@@ -407,11 +415,6 @@ End
 		  If zonesButton <> Nil And Island <> Nil Then
 		    zonesButton.Caption = "Zones (" + Island.Zones.Count.ToString + ")"
 		  End If
-		  
-		  For Each item As WebContainer In mRoomContainers
-		    item.Close
-		  Next
-		  mRoomContainers.RemoveAll
 		  
 		  Var b As WebToolbarButton = WebToolbarButton(MainToolbar.ItemAt(2))
 		  Var menu As New WebMenuItem
@@ -482,6 +485,10 @@ End
 
 	#tag Property, Flags = &h21
 		Private mCurrentZoneIndex As Integer = -1
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
+		Private mEmptyRoomContainers() As IslandAddRoomContainer
 	#tag EndProperty
 
 	#tag Property, Flags = &h21

@@ -7,7 +7,7 @@ Inherits WebSession
   confirmmessage=
   AllowTabOrderWrap=False
   ColorMode=0
-  SendEventsInBatches=False
+  SendEventsInBatches=True
 #tag EndSession
 	#tag Event
 		Sub Opening()

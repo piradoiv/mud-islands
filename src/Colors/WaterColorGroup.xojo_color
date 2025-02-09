@@ -1,8 +1,8 @@
 #tag ColorGroup
-	CodeName=RectangleBackgroundColorGroup
+	CodeName=WaterColorGroup
 	#tag Color
 		Type=2
 		Platform=3
-		Name=bootstrap|success-bg-subtle
+		Name=bootstrap|primary-bg-subtle
 	#tag EndColor
 #tag EndColorGroup

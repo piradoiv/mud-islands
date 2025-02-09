@@ -1,8 +1,8 @@
 #tag ColorGroup
-	CodeName=RectangleBackgroundColorGroup
+	CodeName=TextBodyColorGroup
 	#tag Color
 		Type=2
 		Platform=3
-		Name=bootstrap|success-bg-subtle
+		Name=bootstrap|body-color
 	#tag EndColor
 #tag EndColorGroup

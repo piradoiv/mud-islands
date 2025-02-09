@@ -27,7 +27,7 @@ Begin WebContainer IslandRoomContainer
    _mPanelIndex    =   -1
    Begin WebRectangle BackgroundRectangle
       BackgroundColor =   RectangleBackgroundColorGroup
-      BorderColor     =   RectangleBorderColorGroup
+      BorderColor     =   &c66666600
       BorderThickness =   2
       ControlCount    =   0
       ControlID       =   ""
@@ -59,33 +59,6 @@ Begin WebContainer IslandRoomContainer
       _mDesignHeight  =   0
       _mDesignWidth   =   0
       _mPanelIndex    =   -1
-      Begin WebCanvas DoorsCanvas
-         ControlID       =   ""
-         CSSClasses      =   ""
-         DiffEngineDisabled=   False
-         Enabled         =   True
-         Height          =   150
-         Index           =   -2147483648
-         Indicator       =   ""
-         Left            =   0
-         LockBottom      =   True
-         LockedInPosition=   False
-         LockHorizontal  =   False
-         LockLeft        =   True
-         LockRight       =   True
-         LockTop         =   True
-         LockVertical    =   False
-         PanelIndex      =   0
-         Parent          =   "BackgroundRectangle"
-         Scope           =   2
-         TabIndex        =   0
-         TabStop         =   True
-         Tooltip         =   ""
-         Top             =   0
-         Visible         =   True
-         Width           =   150
-         _mPanelIndex    =   -1
-      End
       Begin WebLabel CaptionLabel
          Bold            =   False
          ControlID       =   ""
@@ -93,7 +66,7 @@ Begin WebContainer IslandRoomContainer
          Enabled         =   True
          FontName        =   ""
          FontSize        =   0.0
-         Height          =   110
+         Height          =   81
          Index           =   -2147483648
          Indicator       =   ""
          Italic          =   False
@@ -116,7 +89,7 @@ Begin WebContainer IslandRoomContainer
          TextAlignment   =   2
          TextColor       =   &c000000FF
          Tooltip         =   ""
-         Top             =   20
+         Top             =   30
          Underline       =   False
          Visible         =   True
          Width           =   110
@@ -191,6 +164,104 @@ Begin WebContainer IslandRoomContainer
          _mDesignWidth   =   0
          _mPanelIndex    =   -1
       End
+      Begin WebLabel RoomIdLabel
+         Bold            =   True
+         ControlID       =   ""
+         CSSClasses      =   ""
+         Enabled         =   True
+         FontName        =   ""
+         FontSize        =   12.0
+         Height          =   24
+         Index           =   -2147483648
+         Indicator       =   ""
+         Italic          =   False
+         Left            =   20
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockHorizontal  =   False
+         LockLeft        =   True
+         LockRight       =   True
+         LockTop         =   True
+         LockVertical    =   False
+         Multiline       =   False
+         PanelIndex      =   0
+         Parent          =   "BackgroundRectangle"
+         Scope           =   2
+         TabIndex        =   4
+         TabPanelIndex   =   0
+         TabStop         =   True
+         Text            =   "Untitled"
+         TextAlignment   =   2
+         TextColor       =   &c000000FF
+         Tooltip         =   ""
+         Top             =   4
+         Underline       =   False
+         Visible         =   True
+         Width           =   110
+         _mPanelIndex    =   -1
+      End
+   End
+   Begin WebLabel ClickableLabel
+      Bold            =   False
+      ControlID       =   ""
+      CSSClasses      =   ""
+      Enabled         =   True
+      FontName        =   ""
+      FontSize        =   0.0
+      Height          =   150
+      Index           =   -2147483648
+      Indicator       =   ""
+      Italic          =   False
+      Left            =   0
+      LockBottom      =   True
+      LockedInPosition=   False
+      LockHorizontal  =   False
+      LockLeft        =   True
+      LockRight       =   True
+      LockTop         =   True
+      LockVertical    =   False
+      Multiline       =   False
+      PanelIndex      =   0
+      Scope           =   2
+      TabIndex        =   5
+      TabStop         =   True
+      Text            =   ""
+      TextAlignment   =   0
+      TextColor       =   &c000000FF
+      Tooltip         =   ""
+      Top             =   0
+      Underline       =   False
+      Visible         =   True
+      Width           =   150
+      _mPanelIndex    =   -1
+   End
+   Begin WebCanvas DoorsCanvas
+      ControlID       =   ""
+      CSSClasses      =   ""
+      DiffEngineDisabled=   True
+      Enabled         =   False
+      Height          =   150
+      Index           =   -2147483648
+      Indicator       =   ""
+      Left            =   0
+      LockBottom      =   True
+      LockedInPosition=   False
+      LockHorizontal  =   False
+      LockLeft        =   True
+      LockRight       =   True
+      LockTop         =   True
+      LockVertical    =   False
+      PanelIndex      =   0
+      Parent          =   "nil"
+      Scope           =   2
+      TabIndex        =   0
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Tooltip         =   ""
+      Top             =   0
+      Visible         =   False
+      Width           =   150
+      _mPanelIndex    =   -1
    End
 End
 #tag EndWebContainerControl
@@ -200,32 +271,50 @@ End
 		Sub Refresh()
 		  CaptionLabel.Text = room.Name + EndOfLine + "(" + room.X.ToString + ", " + room.Y.ToString + ", " + room.Z.ToString + ")"
 		  
+		  RoomIdLabel.Text = If(Room.Id = "", "[no-id]", Room.Id)
+		  RoomIdLabel.TextColor = If(Room.Id = "", New ColorGroup(Color.Red), TextBodyColorGroup)
+		  ClickableLabel.Tooltip = Room.Id
+		  
 		  ZoneRectangle.BackgroundColor = room.Zone.ZoneColor
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Sub SetBorders(north As Boolean, south As Boolean, east As Boolean, west As Boolean)
+		  Const borderStyle = "dashed"
+		  Const borderWidth = "1px"
+		  Var borderC As Color = TextBodyColorGroup
+		  borderC = Color.HSV(borderC.Hue, borderC.Saturation, borderC.Value, 200)
+		  Var borderColor As String = borderC.ToString.Replace("&h", "#")
+		  
 		  If north Then
-		    BackgroundRectangle.Style.Value("border-top-style") = "none"
+		    BackgroundRectangle.Style.Value("border-top-style") = borderStyle
+		    BackgroundRectangle.Style.Value("border-top-width") = borderWidth
+		    BackgroundRectangle.Style.Value("border-top-color") = borderColor
 		    BackgroundRectangle.Style.Value("border-top-left-radius") = "0"
 		    BackgroundRectangle.Style.Value("border-top-right-radius") = "0"
 		  End If
 		  
 		  If south Then
-		    BackgroundRectangle.Style.Value("border-bottom-style") = "none"
+		    BackgroundRectangle.Style.Value("border-bottom-style") = borderStyle
+		    BackgroundRectangle.Style.Value("border-bottom-width") = borderWidth
+		    BackgroundRectangle.Style.Value("border-bottom-color") = borderColor
 		    BackgroundRectangle.Style.Value("border-bottom-left-radius") = "0"
 		    BackgroundRectangle.Style.Value("border-bottom-right-radius") = "0"
 		  End If
 		  
 		  If east Then
-		    BackgroundRectangle.Style.Value("border-right-style") = "none"
+		    BackgroundRectangle.Style.Value("border-right-style") = borderStyle
+		    BackgroundRectangle.Style.Value("border-right-width") = borderWidth
+		    BackgroundRectangle.Style.Value("border-right-color") = borderColor
 		    BackgroundRectangle.Style.Value("border-top-right-radius") = "0"
 		    BackgroundRectangle.Style.Value("border-bottom-right-radius") = "0"
 		  End If
 		  
 		  If west Then
-		    BackgroundRectangle.Style.Value("border-left-style") = "none"
+		    BackgroundRectangle.Style.Value("border-left-style") = borderStyle
+		    BackgroundRectangle.Style.Value("border-left-width") = borderWidth
+		    BackgroundRectangle.Style.Value("border-left-color") = borderColor
 		    BackgroundRectangle.Style.Value("border-top-left-radius") = "0"
 		    BackgroundRectangle.Style.Value("border-bottom-left-radius") = "0"
 		  End If
@@ -284,20 +373,28 @@ End
 
 #tag EndWindowCode
 
+#tag Events ClickableLabel
+	#tag Event
+		Sub Pressed()
+		  RaiseEvent Pressed
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub Opening()
+		  Me.Style.Cursor = WebStyle.Cursors.Pointer
+		End Sub
+	#tag EndEvent
+#tag EndEvents
 #tag Events DoorsCanvas
 	#tag Event
 		Sub Paint(g As WebGraphics)
 		  Const padding = 10
+		  Const d = 8
 		  
 		  If Room.IsHidden Then
 		    g.DrawingColor = Color.Yellow
 		    g.FillRectangle(0, 0, g.Width, g.Height)
 		  End If
-		  
-		  Var p As New Picture(1, 1)
-		  Var d As String = "🚪"
-		  Var w As Double = p.Graphics.TextWidth(d)
-		  Var h As Double = p.Graphics.TextHeight(d, 100)' + p.Graphics.FontAscent
 		  
 		  Var island As MUD.Island = Room.Zone.Island
 		  
@@ -307,67 +404,55 @@ End
 		    Case "north"
 		      Var door As MUD.Door = island.GetDoorBetweenRooms(Room, MUD.Room(entry.Value))
 		      If door <> Nil Then
-		        g.DrawText(d, g.Width / 2 - w / 2, padding)
+		        g.FillRectangle(g.Width / 2 - d / 2, -(d / 2), d, d)
 		      End If
 		    Case "south"
 		      Var door As MUD.Door = island.GetDoorBetweenRooms(Room, MUD.Room(entry.Value))
 		      If door <> Nil Then
-		        g.DrawText(d, g.Width / 2 - w / 2, g.Height - padding * 2)
+		        g.FillRectangle(g.Width / 2 - d / 2, g.Height - d / 2, d, d)
 		      End If
 		    Case "east"
 		      Var door As MUD.Door = island.GetDoorBetweenRooms(Room, MUD.Room(entry.Value))
 		      If door <> Nil Then
-		        g.DrawText(d, g.Width - padding * 2, g.Height / 2 + h / 2)
+		        g.FillRectangle(g.Width - d / 2, g.Height / 2 - d / 2, d, d)
 		      End If
 		    Case "west"
 		      Var door As MUD.Door = island.GetDoorBetweenRooms(Room, MUD.Room(entry.Value))
 		      If door <> Nil Then
-		        g.DrawText(d, padding, g.Height / 2 + h / 2)
+		        g.FillRectangle(-(d / 2), g.Height / 2 - d / 2, d, d)
 		      End If
 		    Case "up"
 		      Var door As MUD.Door = island.GetDoorBetweenRooms(Room, MUD.Room(entry.Value))
 		      If door <> Nil Then
-		        g.DrawText(d, g.Width / 2 - w / 2, g.Height / 2 - padding * 4)
+		        g.FillRectangle(g.Width / 2 - d / 2, g.Height / 2 - d / 2, d, d)
 		      End If
 		    Case "down"
 		      Var door As MUD.Door = island.GetDoorBetweenRooms(Room, MUD.Room(entry.Value))
 		      If door <> Nil Then
-		        g.DrawText(d, g.Width / 2 - w / 2, g.Height / 2 + padding * 4)
+		        g.FillRectangle(g.Width / 2 - d / 2, g.Height / 2 - d / 2, d, d)
 		      End If
 		    Case "northwest"
 		      Var door As MUD.Door = island.GetDoorBetweenRooms(Room, MUD.Room(entry.Value))
 		      If door <> Nil Then
-		        g.DrawText(d, padding, padding)
+		        g.FillRectangle(-(d / 2), -(d / 2), d, d)
 		      End If
 		    Case "northeast"
 		      Var door As MUD.Door = island.GetDoorBetweenRooms(Room, MUD.Room(entry.Value))
 		      If door <> Nil Then
-		        g.DrawText(d, g.Width - padding * 2, padding)
+		        g.FillRectangle(g.Width - d / 2, -(d / 2), d, d)
 		      End If
 		    Case "southwest"
 		      Var door As MUD.Door = island.GetDoorBetweenRooms(Room, MUD.Room(entry.Value))
 		      If door <> Nil Then
-		        g.DrawText(d, padding, g.Height - padding * 2)
+		        g.FillRectangle(-(d / 2), g.Height - d / 2, d, d)
 		      End If
 		    Case "southeast"
 		      Var door As MUD.Door = island.GetDoorBetweenRooms(Room, MUD.Room(entry.Value))
 		      If door <> Nil Then
-		        g.DrawText(d, g.Width - padding * 2, g.Height - padding * 2)
+		        g.FillRectangle(g.Width - d / 2, g.Height - d / 2, d, d)
 		      End If
 		    End Select
 		  Next
-		End Sub
-	#tag EndEvent
-#tag EndEvents
-#tag Events CaptionLabel
-	#tag Event
-		Sub Pressed()
-		  RaiseEvent Pressed
-		End Sub
-	#tag EndEvent
-	#tag Event
-		Sub Opening()
-		  Me.Style.Cursor = WebStyle.Cursors.Pointer
 		End Sub
 	#tag EndEvent
 #tag EndEvents

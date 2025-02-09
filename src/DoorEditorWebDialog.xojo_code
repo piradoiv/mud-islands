@@ -1,46 +1,43 @@
-#tag WebContainerControl
-Begin WebContainer IslandAddRoomContainer
+#tag WebPage
+Begin WebDialog DoorEditorWebDialog
    Compatibility   =   ""
    ControlCount    =   0
    ControlID       =   ""
    CSSClasses      =   ""
    Enabled         =   True
-   Height          =   150
+   Height          =   418
+   Index           =   -2147483648
    Indicator       =   0
    LayoutDirection =   0
    LayoutType      =   0
    Left            =   0
    LockBottom      =   False
    LockHorizontal  =   False
-   LockLeft        =   True
+   LockLeft        =   False
    LockRight       =   False
-   LockTop         =   True
+   LockTop         =   False
    LockVertical    =   False
    PanelIndex      =   0
-   ScrollDirection =   0
+   Position        =   0
    TabIndex        =   0
    Top             =   0
    Visible         =   True
-   Width           =   150
+   Width           =   250
    _mDesignHeight  =   0
    _mDesignWidth   =   0
+   _mName          =   ""
    _mPanelIndex    =   -1
-   Begin WebRectangle Rectangle1
-      BackgroundColor =   &cFFFFFF
-      BorderColor     =   TextBodyColorGroup
-      BorderThickness =   1
+   Begin DoorEditorContainer DoorEditor
       ControlCount    =   0
       ControlID       =   ""
-      CornerSize      =   -1
       CSSClasses      =   ""
       Enabled         =   True
-      HasBackgroundColor=   False
-      Height          =   130
+      Height          =   418
       Index           =   -2147483648
-      Indicator       =   ""
-      LayoutDirection =   "LayoutDirections.LeftToRight"
-      LayoutType      =   "LayoutTypes.Fixed"
-      Left            =   10
+      Indicator       =   0
+      LayoutDirection =   0
+      LayoutType      =   0
+      Left            =   0
       LockBottom      =   True
       LockedInPosition=   False
       LockHorizontal  =   False
@@ -50,88 +47,45 @@ Begin WebContainer IslandAddRoomContainer
       LockVertical    =   False
       PanelIndex      =   0
       Scope           =   2
+      ScrollDirection =   0
       TabIndex        =   0
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   10
+      Top             =   0
       Visible         =   True
-      Width           =   130
+      Width           =   250
       _mDesignHeight  =   0
       _mDesignWidth   =   0
       _mPanelIndex    =   -1
-      Begin WebLabel Label1
-         Bold            =   False
-         ControlID       =   ""
-         CSSClasses      =   "h1"
-         Enabled         =   True
-         FontName        =   ""
-         FontSize        =   0.0
-         Height          =   130
-         Index           =   -2147483648
-         Indicator       =   ""
-         Italic          =   False
-         Left            =   10
-         LockBottom      =   True
-         LockedInPosition=   False
-         LockHorizontal  =   False
-         LockLeft        =   True
-         LockRight       =   True
-         LockTop         =   True
-         LockVertical    =   False
-         Multiline       =   False
-         PanelIndex      =   0
-         Parent          =   "Rectangle1"
-         Scope           =   2
-         TabIndex        =   1
-         TabPanelIndex   =   0
-         TabStop         =   True
-         Text            =   "+"
-         TextAlignment   =   2
-         TextColor       =   TextBodyColorGroup
-         Tooltip         =   ""
-         Top             =   10
-         Underline       =   False
-         Visible         =   True
-         Width           =   130
-         _mPanelIndex    =   -1
-      End
    End
 End
-#tag EndWebContainerControl
+#tag EndWebPage
 
 #tag WindowCode
+	#tag Method, Flags = &h0
+		Sub LoadDoor(door As MUD.Door)
+		  DoorEditor.LoadDoor(door)
+		End Sub
+	#tag EndMethod
+
+
 	#tag Hook, Flags = &h0
-		Event CreateRoom(x As Integer, y As Integer)
+		Event DoorSaved(door As MUD.Door)
 	#tag EndHook
-
-
-	#tag Property, Flags = &h0
-		X As Integer
-	#tag EndProperty
-
-	#tag Property, Flags = &h0
-		Y As Integer
-	#tag EndProperty
 
 
 #tag EndWindowCode
 
-#tag Events Rectangle1
+#tag Events DoorEditor
 	#tag Event
-		Sub Opening()
-		  Me.Style.Value("border-style") = "dashed"
-		End Sub
-	#tag EndEvent
-#tag EndEvents
-#tag Events Label1
-	#tag Event
-		Sub Opening()
-		  Me.Style.Cursor = WebStyle.Cursors.Pointer
+		Sub CancelPressed()
+		  Self.Close
 		End Sub
 	#tag EndEvent
 	#tag Event
-		Sub Pressed()
-		  RaiseEvent CreateRoom(X, Y)
+		Sub DoorSaved(door As MUD.Door)
+		  RaiseEvent DoorSaved(door)
+		  Self.Close
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -145,18 +99,10 @@ End
 		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="_mPanelIndex"
+		Name="Index"
 		Visible=false
-		Group="Behavior"
-		InitialValue="-1"
-		Type="Integer"
-		EditorType=""
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="ControlCount"
-		Visible=false
-		Group="Behavior"
-		InitialValue=""
+		Group="ID"
+		InitialValue="-2147483648"
 		Type="Integer"
 		EditorType=""
 	#tag EndViewProperty
@@ -193,6 +139,34 @@ End
 		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
+		Name="Position"
+		Visible=true
+		Group="Position"
+		InitialValue="0"
+		Type="WebDialog.Positions"
+		EditorType="Enum"
+		#tag EnumValues
+			"0 - Top"
+			"1 - Center"
+		#tag EndEnumValues
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="ControlCount"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="_mPanelIndex"
+		Visible=false
+		Group="Behavior"
+		InitialValue="-1"
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
 		Name="ControlID"
 		Visible=false
 		Group="Behavior"
@@ -209,59 +183,87 @@ End
 		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="LockBottom"
+		Name="Height"
 		Visible=true
 		Group="Behavior"
-		InitialValue="False"
+		InitialValue="400"
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="LayoutType"
+		Visible=true
+		Group="Behavior"
+		InitialValue="LayoutTypes.Fixed"
+		Type="LayoutTypes"
+		EditorType="Enum"
+		#tag EnumValues
+			"0 - Fixed"
+			"1 - Flex"
+		#tag EndEnumValues
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="LockBottom"
+		Visible=false
+		Group="Behavior"
+		InitialValue=""
 		Type="Boolean"
 		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="LockHorizontal"
-		Visible=true
+		Visible=false
 		Group="Behavior"
-		InitialValue="False"
+		InitialValue=""
 		Type="Boolean"
 		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="LockLeft"
-		Visible=true
+		Visible=false
 		Group="Behavior"
-		InitialValue="True"
+		InitialValue=""
 		Type="Boolean"
 		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="LockRight"
-		Visible=true
+		Visible=false
 		Group="Behavior"
-		InitialValue="False"
+		InitialValue=""
 		Type="Boolean"
 		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="LockTop"
-		Visible=true
+		Visible=false
 		Group="Behavior"
-		InitialValue="True"
+		InitialValue=""
 		Type="Boolean"
 		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="LockVertical"
-		Visible=true
+		Visible=false
 		Group="Behavior"
-		InitialValue="False"
+		InitialValue=""
 		Type="Boolean"
 		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Visible"
-		Visible=true
+		Visible=false
 		Group="Behavior"
 		InitialValue=""
 		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Width"
+		Visible=true
+		Group="Behavior"
+		InitialValue="600"
+		Type="Integer"
 		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
@@ -287,20 +289,6 @@ End
 		InitialValue=""
 		Type="String"
 		EditorType="MultiLineEditor"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="ScrollDirection"
-		Visible=true
-		Group="Behavior"
-		InitialValue="ScrollDirections.None"
-		Type="WebContainer.ScrollDirections"
-		EditorType="Enum"
-		#tag EnumValues
-			"0 - None"
-			"1 - Horizontal"
-			"2 - Vertical"
-			"3 - Both"
-		#tag EndEnumValues
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="TabIndex"
@@ -331,21 +319,9 @@ End
 		#tag EndEnumValues
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="LayoutType"
-		Visible=true
-		Group="View"
-		InitialValue="LayoutTypes.Fixed"
-		Type="LayoutTypes"
-		EditorType="Enum"
-		#tag EnumValues
-			"0 - Fixed"
-			"1 - Flex"
-		#tag EndEnumValues
-	#tag EndViewProperty
-	#tag ViewProperty
 		Name="LayoutDirection"
 		Visible=true
-		Group="View"
+		Group="WebView"
 		InitialValue="LayoutDirections.LeftToRight"
 		Type="LayoutDirections"
 		EditorType="Enum"
@@ -355,37 +331,5 @@ End
 			"2 - TopToBottom"
 			"3 - BottomToTop"
 		#tag EndEnumValues
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="Width"
-		Visible=false
-		Group=""
-		InitialValue="250"
-		Type="Integer"
-		EditorType=""
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="Height"
-		Visible=false
-		Group=""
-		InitialValue="250"
-		Type="Integer"
-		EditorType=""
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="X"
-		Visible=false
-		Group="Behavior"
-		InitialValue=""
-		Type="Integer"
-		EditorType=""
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="Y"
-		Visible=false
-		Group="Behavior"
-		InitialValue=""
-		Type="Integer"
-		EditorType=""
 	#tag EndViewProperty
 #tag EndViewBehavior

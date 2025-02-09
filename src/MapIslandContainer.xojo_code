@@ -27,7 +27,7 @@ Begin WebContainer MapIslandContainer
    _mPanelIndex    =   -1
    Begin WebRectangle BackgroundRectangle
       BackgroundColor =   RectangleBackgroundColorGroup
-      BorderColor     =   RectangleBorderColorGroup
+      BorderColor     =   TextBodyColorGroup
       BorderThickness =   1
       ControlCount    =   0
       ControlID       =   ""
