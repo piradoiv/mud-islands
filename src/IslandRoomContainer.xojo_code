@@ -59,6 +59,34 @@ Begin WebContainer IslandRoomContainer
       _mDesignHeight  =   0
       _mDesignWidth   =   0
       _mPanelIndex    =   -1
+      Begin WebCanvas DoorsCanvas
+         ControlID       =   ""
+         CSSClasses      =   ""
+         DiffEngineDisabled=   False
+         Enabled         =   True
+         Height          =   150
+         Index           =   -2147483648
+         Indicator       =   ""
+         Left            =   0
+         LockBottom      =   True
+         LockedInPosition=   False
+         LockHorizontal  =   False
+         LockLeft        =   True
+         LockRight       =   True
+         LockTop         =   True
+         LockVertical    =   False
+         PanelIndex      =   0
+         Parent          =   "BackgroundRectangle"
+         Scope           =   2
+         TabIndex        =   5
+         TabPanelIndex   =   0
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   0
+         Visible         =   True
+         Width           =   150
+         _mPanelIndex    =   -1
+      End
       Begin WebLabel CaptionLabel
          Bold            =   False
          ControlID       =   ""
@@ -127,6 +155,42 @@ Begin WebContainer IslandRoomContainer
          _mPanelIndex    =   -1
          _ProtectImage   =   False
       End
+      Begin WebLabel RoomIdLabel
+         Bold            =   True
+         ControlID       =   ""
+         CSSClasses      =   ""
+         Enabled         =   True
+         FontName        =   ""
+         FontSize        =   12.0
+         Height          =   24
+         Index           =   -2147483648
+         Indicator       =   ""
+         Italic          =   False
+         Left            =   20
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockHorizontal  =   False
+         LockLeft        =   True
+         LockRight       =   True
+         LockTop         =   True
+         LockVertical    =   False
+         Multiline       =   False
+         PanelIndex      =   0
+         Parent          =   "BackgroundRectangle"
+         Scope           =   2
+         TabIndex        =   4
+         TabPanelIndex   =   0
+         TabStop         =   True
+         Text            =   "Untitled"
+         TextAlignment   =   2
+         TextColor       =   &c000000FF
+         Tooltip         =   ""
+         Top             =   4
+         Underline       =   False
+         Visible         =   True
+         Width           =   110
+         _mPanelIndex    =   -1
+      End
       Begin WebRectangle ZoneRectangle
          BackgroundColor =   &cFFFFFF
          BorderColor     =   &c000000FF
@@ -164,42 +228,6 @@ Begin WebContainer IslandRoomContainer
          _mDesignWidth   =   0
          _mPanelIndex    =   -1
       End
-      Begin WebLabel RoomIdLabel
-         Bold            =   True
-         ControlID       =   ""
-         CSSClasses      =   ""
-         Enabled         =   True
-         FontName        =   ""
-         FontSize        =   12.0
-         Height          =   24
-         Index           =   -2147483648
-         Indicator       =   ""
-         Italic          =   False
-         Left            =   20
-         LockBottom      =   False
-         LockedInPosition=   False
-         LockHorizontal  =   False
-         LockLeft        =   True
-         LockRight       =   True
-         LockTop         =   True
-         LockVertical    =   False
-         Multiline       =   False
-         PanelIndex      =   0
-         Parent          =   "BackgroundRectangle"
-         Scope           =   2
-         TabIndex        =   4
-         TabPanelIndex   =   0
-         TabStop         =   True
-         Text            =   "Untitled"
-         TextAlignment   =   2
-         TextColor       =   &c000000FF
-         Tooltip         =   ""
-         Top             =   4
-         Underline       =   False
-         Visible         =   True
-         Width           =   110
-         _mPanelIndex    =   -1
-      End
    End
    Begin WebLabel ClickableLabel
       Bold            =   False
@@ -235,34 +263,6 @@ Begin WebContainer IslandRoomContainer
       Width           =   150
       _mPanelIndex    =   -1
    End
-   Begin WebCanvas DoorsCanvas
-      ControlID       =   ""
-      CSSClasses      =   ""
-      DiffEngineDisabled=   True
-      Enabled         =   False
-      Height          =   150
-      Index           =   -2147483648
-      Indicator       =   ""
-      Left            =   0
-      LockBottom      =   True
-      LockedInPosition=   False
-      LockHorizontal  =   False
-      LockLeft        =   True
-      LockRight       =   True
-      LockTop         =   True
-      LockVertical    =   False
-      PanelIndex      =   0
-      Parent          =   "nil"
-      Scope           =   2
-      TabIndex        =   0
-      TabPanelIndex   =   0
-      TabStop         =   True
-      Tooltip         =   ""
-      Top             =   0
-      Visible         =   False
-      Width           =   150
-      _mPanelIndex    =   -1
-   End
 End
 #tag EndWebContainerControl
 
@@ -293,6 +293,10 @@ End
 		    BackgroundRectangle.Style.Value("border-top-color") = borderColor
 		    BackgroundRectangle.Style.Value("border-top-left-radius") = "0"
 		    BackgroundRectangle.Style.Value("border-top-right-radius") = "0"
+		  Else
+		    BackgroundRectangle.Style.Remove("border-top-style")
+		    BackgroundRectangle.Style.Remove("border-top-width")
+		    BackgroundRectangle.Style.Remove("border-top-color")
 		  End If
 		  
 		  If south Then
@@ -301,6 +305,10 @@ End
 		    BackgroundRectangle.Style.Value("border-bottom-color") = borderColor
 		    BackgroundRectangle.Style.Value("border-bottom-left-radius") = "0"
 		    BackgroundRectangle.Style.Value("border-bottom-right-radius") = "0"
+		  Else
+		    BackgroundRectangle.Style.Remove("border-bottom-style")
+		    BackgroundRectangle.Style.Remove("border-bottom-width")
+		    BackgroundRectangle.Style.Remove("border-bottom-color")
 		  End If
 		  
 		  If east Then
@@ -309,6 +317,10 @@ End
 		    BackgroundRectangle.Style.Value("border-right-color") = borderColor
 		    BackgroundRectangle.Style.Value("border-top-right-radius") = "0"
 		    BackgroundRectangle.Style.Value("border-bottom-right-radius") = "0"
+		  Else
+		    BackgroundRectangle.Style.Remove("border-right-style")
+		    BackgroundRectangle.Style.Remove("border-right-width")
+		    BackgroundRectangle.Style.Remove("border-right-color")
 		  End If
 		  
 		  If west Then
@@ -317,6 +329,26 @@ End
 		    BackgroundRectangle.Style.Value("border-left-color") = borderColor
 		    BackgroundRectangle.Style.Value("border-top-left-radius") = "0"
 		    BackgroundRectangle.Style.Value("border-bottom-left-radius") = "0"
+		  Else
+		    BackgroundRectangle.Style.Remove("border-left-style")
+		    BackgroundRectangle.Style.Remove("border-left-width")
+		    BackgroundRectangle.Style.Remove("border-left-color")
+		  End If
+		  
+		  If Not north And Not west Then
+		    BackgroundRectangle.Style.Remove("border-top-left-radius")
+		  End If
+		  
+		  If Not north And Not east Then
+		    BackgroundRectangle.Style.Remove("border-top-right-radius")
+		  End If
+		  
+		  If Not south And Not west Then
+		    BackgroundRectangle.Style.Remove("border-bottom-left-radius")
+		  End If
+		  
+		  If Not south And Not east Then
+		    BackgroundRectangle.Style.Remove("border-bottom-right-radius")
 		  End If
 		End Sub
 	#tag EndMethod
@@ -373,18 +405,6 @@ End
 
 #tag EndWindowCode
 
-#tag Events ClickableLabel
-	#tag Event
-		Sub Pressed()
-		  RaiseEvent Pressed
-		End Sub
-	#tag EndEvent
-	#tag Event
-		Sub Opening()
-		  Me.Style.Cursor = WebStyle.Cursors.Pointer
-		End Sub
-	#tag EndEvent
-#tag EndEvents
 #tag Events DoorsCanvas
 	#tag Event
 		Sub Paint(g As WebGraphics)
@@ -453,6 +473,18 @@ End
 		      End If
 		    End Select
 		  Next
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events ClickableLabel
+	#tag Event
+		Sub Pressed()
+		  RaiseEvent Pressed
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub Opening()
+		  Me.Style.Cursor = WebStyle.Cursors.Pointer
 		End Sub
 	#tag EndEvent
 #tag EndEvents

@@ -273,6 +273,12 @@ End
 		End Sub
 	#tag EndEvent
 
+	#tag Event
+		Sub Shown()
+		  DrawRoomContainers
+		End Sub
+	#tag EndEvent
+
 
 	#tag Method, Flags = &h21
 		Private Sub CreateNewRoomHandler(sender As WebContainer, x As Integer, y As Integer)
@@ -286,6 +292,14 @@ End
 		  newRoom.Zone = Island.Zones(mCurrentZoneIndex)
 		  Island.Zones(mCurrentZoneIndex).Rooms.Add(newRoom)
 		  
+		  For i As Integer = 0 To mEmptyRoomContainers.LastIndex
+		    If sender = mEmptyRoomContainers(i) Then
+		      mEmptyRoomContainers.RemoveAt(i)
+		      Exit
+		    End If
+		  Next
+		  sender.Close
+		  
 		  Refresh
 		End Sub
 	#tag EndMethod
@@ -294,6 +308,15 @@ End
 		Private Sub DeleteRoomPressedHandler(sender As EditRoomWebDialog)
 		  Var r As MUD.Room = sender.Room
 		  r.Zone.RemoveRoomAt(r.X, r.Y, r.Z)
+		  
+		  For i As Integer = 0 To mRoomContainers.LastIndex
+		    If sender = mRoomContainers(i) Then
+		      mRoomContainers.RemoveAt(i)
+		      Exit
+		    End If
+		  Next
+		  sender.Close
+		  
 		  Refresh
 		End Sub
 	#tag EndMethod
@@ -302,11 +325,6 @@ End
 		Private Sub DrawRoomContainers()
 		  Const defaultValue = -9999
 		  Var grid As New Dictionary
-		  
-		  For Each c As WebContainer In mRoomContainers
-		    c.Close
-		  Next
-		  mRoomContainers.RemoveAll
 		  
 		  If mCurrentZoneIndex > Island.Zones.LastIndex Then
 		    Return
@@ -328,6 +346,17 @@ End
 		  
 		  Var testContainer As New IslandRoomContainer
 		  If rooms.Count = 0 Then
+		    For Each c As WebContainer In mRoomContainers
+		      c.Close
+		    Next
+		    
+		    For Each c As WebContainer In mEmptyRoomContainers
+		      c.Close
+		    Next
+		    
+		    mRoomContainers.RemoveAll
+		    mEmptyRoomContainers.RemoveAll
+		    
 		    RoomsRectangle.Width = testContainer.Width
 		    RoomsRectangle.Height = testContainer.Height
 		    Var c As New IslandAddRoomContainer
@@ -335,7 +364,7 @@ End
 		    c.Y = 0
 		    AddHandler c.CreateRoom, WeakAddressOf CreateNewRoomHandler
 		    c.EmbedWithin(RoomsRectangle, RoomsRectangle.Left, RoomsRectangle.Top, c.Width, c.Height)
-		    mRoomContainers.Add(c)
+		    mEmptyRoomContainers.Add(c)
 		    RoomsRectangle.Left = Session.ClientWidth / 2 - RoomsRectangle.Width / 2
 		    RoomsRectangle.Top = Max(MainToolbar.Height, Session.ClientHeight / 2 - RoomsRectangle.Height / 2)
 		    Return
@@ -365,17 +394,33 @@ End
 		  Var offsetX As Integer = (0 - minX) * testContainer.Width
 		  Var offsetY As Integer = (0 - minY) * testContainer.Height
 		  
-		  For Each room As MUD.Room In rooms
-		    Var c As New IslandRoomContainer
-		    AddHandler c.Pressed, WeakAddressOf RoomPressedHandler
+		  For i As Integer = 0 To rooms.LastIndex
+		    Var room As MUD.Room = rooms(i)
+		    Var c As IslandRoomContainer
+		    If i <= mRoomContainers.LastIndex Then
+		      c = mRoomContainers(i)
+		      c.Left = room.X * c.Width + offsetX
+		      c.Top = room.Y * c.Height + offsetY
+		    Else
+		      c = New IslandRoomContainer
+		      AddHandler c.Pressed, WeakAddressOf RoomPressedHandler
+		      c.EmbedWithin(RoomsRectangle, RoomsRectangle.Left + room.X * c.Width + offsetX, RoomsRectangle.Top + room.Y * c.Height + offsetY, c.Width, c.Height)
+		      mRoomContainers.Add(c)
+		    End If
+		    
 		    c.Room = room
 		    c.HasLadder = Island.RoomHasLadders(room.X, room.Y, room.Z)
 		    SetBorders(c)
-		    c.EmbedWithin(RoomsRectangle, RoomsRectangle.Left + room.X * c.Width + offsetX, RoomsRectangle.Top + room.Y * c.Height + offsetY, c.Width, c.Height)
-		    mRoomContainers.Add(c)
-		    
-		    Var key As String = room.X.ToString + "-" + room.Y.ToString
-		    grid.Value(key) = True
+		    grid.Value(room.X.ToString + "-" + room.Y.ToString) = True
+		  Next
+		  
+		  While mRoomContainers.LastIndex > rooms.LastIndex
+		    mRoomContainers.RemoveAt(mRoomContainers.LastIndex)
+		  Wend
+		  
+		  For i As Integer = 0 To mEmptyRoomContainers.LastIndex
+		    Var c As IslandAddRoomContainer = mEmptyRoomContainers(i)
+		    grid.Value(c.X.ToString + "-" + c.Y.ToString) = True
 		  Next
 		  
 		  For Each room As MUD.Room In rooms
@@ -389,9 +434,21 @@ End
 		        c.Y = position.Right
 		        AddHandler c.CreateRoom, WeakAddressOf CreateNewRoomHandler
 		        c.EmbedWithin(RoomsRectangle, RoomsRectangle.Left + position.Left * c.Width + offsetX, RoomsRectangle.Top + position.Right * c.Height + offsetY, c.Width, c.Height)
-		        mRoomContainers.Add(c)
+		        mEmptyRoomContainers.Add(c)
+		        grid.Value(key) = True
 		      End If
 		    Next
+		  Next
+		  
+		  For i As Integer = mEmptyRoomContainers.LastIndex DownTo 0
+		    Var emptyRoom As IslandAddRoomContainer = mEmptyRoomContainers(i)
+		    emptyRoom.Left = emptyRoom.X * emptyRoom.Width + offsetX
+		    emptyRoom.Top = emptyRoom.Y * emptyRoom.Height + offsetY
+		    
+		    If Not grid.HasKey(emptyRoom.X.ToString + "-" + emptyRoom.Y.ToString) Then
+		      mEmptyRoomContainers(i).Close
+		      mEmptyRoomContainers.RemoveAt(i)
+		    End If
 		  Next
 		  
 		  RoomsRectangle.Left = Session.ClientWidth / 2 - RoomsRectangle.Width / 2
@@ -461,6 +518,10 @@ End
 		  Var east As Boolean = Island.RoomExists(x + 1, y, mZ)
 		  Var west As Boolean = Island.RoomExists(x - 1, y, mZ)
 		  
+		  If room.Id = "zzzz" Then
+		    Break
+		  End If
+		  
 		  c.SetBorders(north, south, east, west)
 		End Sub
 	#tag EndMethod
@@ -500,7 +561,7 @@ End
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
-		Private mRoomContainers() As WebContainer
+		Private mRoomContainers() As IslandRoomContainer
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
