@@ -26,7 +26,6 @@ Begin WebContainer MapIslandContainer
    _mDesignWidth   =   0
    _mPanelIndex    =   -1
    Begin WebRectangle BackgroundRectangle
-      BackgroundColor =   RectangleBackgroundColorGroup
       BorderColor     =   TextBodyColorGroup
       BorderThickness =   1
       ControlCount    =   0
@@ -34,7 +33,8 @@ Begin WebContainer MapIslandContainer
       CornerSize      =   -1
       CSSClasses      =   ""
       Enabled         =   True
-      HasBackgroundColor=   True
+      FillColor       =   RectangleBackgroundColorGroup
+      HasFillColor    =   True
       Height          =   150
       Index           =   -2147483648
       Indicator       =   ""
@@ -113,11 +113,6 @@ End
 	#tag EndMethod
 
 
-	#tag Hook, Flags = &h0
-		Event Pressed()
-	#tag EndHook
-
-
 	#tag ComputedProperty, Flags = &h0
 		#tag Getter
 			Get
@@ -145,11 +140,6 @@ End
 #tag EndWindowCode
 
 #tag Events NameLabel
-	#tag Event
-		Sub Pressed()
-		  RaiseEvent Pressed
-		End Sub
-	#tag EndEvent
 	#tag Event
 		Sub Opening()
 		  Me.Style.Cursor = WebStyle.Cursors.Pointer

@@ -176,7 +176,7 @@ End
 
 #tag Events MyMap
 	#tag Event
-		Sub Pressed(container As MapIslandContainer)
+		Sub IslandPressed(container As MapIslandContainer)
 		  Self.Close
 		  Var islandPage As New IslandWebPage
 		  islandPage.Island = container.Island

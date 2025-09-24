@@ -26,7 +26,6 @@ Begin WebContainer IslandRoomContainer
    _mDesignWidth   =   0
    _mPanelIndex    =   -1
    Begin WebRectangle BackgroundRectangle
-      BackgroundColor =   RectangleBackgroundColorGroup
       BorderColor     =   &c66666600
       BorderThickness =   2
       ControlCount    =   0
@@ -34,7 +33,8 @@ Begin WebContainer IslandRoomContainer
       CornerSize      =   -1
       CSSClasses      =   ""
       Enabled         =   True
-      HasBackgroundColor=   True
+      FillColor       =   RectangleBackgroundColorGroup
+      HasFillColor    =   True
       Height          =   150
       Index           =   -2147483648
       Indicator       =   ""
@@ -192,7 +192,6 @@ Begin WebContainer IslandRoomContainer
          _mPanelIndex    =   -1
       End
       Begin WebRectangle ZoneRectangle
-         BackgroundColor =   &cFFFFFF
          BorderColor     =   &c000000FF
          BorderThickness =   0
          ControlCount    =   0
@@ -200,7 +199,8 @@ Begin WebContainer IslandRoomContainer
          CornerSize      =   100
          CSSClasses      =   ""
          Enabled         =   True
-         HasBackgroundColor=   True
+         FillColor       =   &cFFFFFF
+         HasFillColor    =   True
          Height          =   18
          Index           =   -2147483648
          Indicator       =   ""
@@ -229,51 +229,25 @@ Begin WebContainer IslandRoomContainer
          _mPanelIndex    =   -1
       End
    End
-   Begin WebLabel ClickableLabel
-      Bold            =   False
-      ControlID       =   ""
-      CSSClasses      =   ""
-      Enabled         =   True
-      FontName        =   ""
-      FontSize        =   0.0
-      Height          =   150
-      Index           =   -2147483648
-      Indicator       =   ""
-      Italic          =   False
-      Left            =   0
-      LockBottom      =   True
-      LockedInPosition=   False
-      LockHorizontal  =   False
-      LockLeft        =   True
-      LockRight       =   True
-      LockTop         =   True
-      LockVertical    =   False
-      Multiline       =   False
-      PanelIndex      =   0
-      Scope           =   2
-      TabIndex        =   5
-      TabStop         =   True
-      Text            =   ""
-      TextAlignment   =   0
-      TextColor       =   &c000000FF
-      Tooltip         =   ""
-      Top             =   0
-      Underline       =   False
-      Visible         =   True
-      Width           =   150
-      _mPanelIndex    =   -1
-   End
 End
 #tag EndWebContainerControl
 
 #tag WindowCode
+	#tag Event
+		Sub Opening()
+		  For Each ctl As WebUIControl In Self.Controls
+		    ctl.Style.Cursor = WebStyle.Cursors.Pointer
+		  Next
+		End Sub
+	#tag EndEvent
+
+
 	#tag Method, Flags = &h0
 		Sub Refresh()
 		  CaptionLabel.Text = room.Name + EndOfLine + "(" + room.X.ToString + ", " + room.Y.ToString + ", " + room.Z.ToString + ")"
 		  
 		  RoomIdLabel.Text = If(Room.Id = "", "[no-id]", Room.Id)
 		  RoomIdLabel.TextColor = If(Room.Id = "", New ColorGroup(Color.Red), TextBodyColorGroup)
-		  ClickableLabel.Tooltip = Room.Id
 		  
 		  ZoneRectangle.BackgroundColor = room.Zone.ZoneColor
 		End Sub
@@ -352,11 +326,6 @@ End
 		  End If
 		End Sub
 	#tag EndMethod
-
-
-	#tag Hook, Flags = &h0
-		Event Pressed()
-	#tag EndHook
 
 
 	#tag ComputedProperty, Flags = &h0
@@ -449,18 +418,6 @@ End
 		      g.FillRectangle(g.Width - d / 2, g.Height - d / 2, d, d)
 		    End Select
 		  Next
-		End Sub
-	#tag EndEvent
-#tag EndEvents
-#tag Events ClickableLabel
-	#tag Event
-		Sub Pressed()
-		  RaiseEvent Pressed
-		End Sub
-	#tag EndEvent
-	#tag Event
-		Sub Opening()
-		  Me.Style.Cursor = WebStyle.Cursors.Pointer
 		End Sub
 	#tag EndEvent
 #tag EndEvents

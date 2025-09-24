@@ -34,7 +34,6 @@ Begin WebPage IslandWebPage
    _mDesignWidth   =   0
    _mPanelIndex    =   -1
    Begin WebRectangle RoomsRectangle
-      BackgroundColor =   &cFFFFFF
       BorderColor     =   &c000000FF
       BorderThickness =   0
       ControlCount    =   0
@@ -42,7 +41,8 @@ Begin WebPage IslandWebPage
       CornerSize      =   0
       CSSClasses      =   ""
       Enabled         =   True
-      HasBackgroundColor=   False
+      FillColor       =   &cFFFFFF
+      HasFillColor    =   False
       Height          =   150
       Index           =   -2147483648
       Indicator       =   ""
@@ -497,7 +497,7 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
-		Private Sub RoomPressedHandler(sender As IslandRoomContainer)
+		Private Sub RoomPressedHandler(sender As IslandRoomContainer, x As Integer, y As Integer)
 		  EditRoomDialog.Room = sender.Room
 		  EditRoomDialog.Show
 		End Sub

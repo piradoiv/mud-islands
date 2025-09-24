@@ -79,8 +79,8 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
-		Private Sub IslandPressedHandler(sender As MapIslandContainer)
-		  RaiseEvent Pressed(sender)
+		Private Sub IslandPressedHandler(sender As MapIslandContainer, x As Integer, y As Integer)
+		  RaiseEvent IslandPressed(sender)
 		End Sub
 	#tag EndMethod
 
@@ -134,7 +134,7 @@ End
 
 
 	#tag Hook, Flags = &h0
-		Event Pressed(container As MapIslandContainer)
+		Event IslandPressed(container As MapIslandContainer)
 	#tag EndHook
 
 
