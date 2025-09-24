@@ -196,35 +196,6 @@ Begin WebPage IslandWebPage
       _mDesignWidth   =   0
       _mPanelIndex    =   -1
    End
-   Begin WebSlider ZSlider
-      ControlID       =   ""
-      CSSClasses      =   ""
-      Enabled         =   True
-      Height          =   20
-      Index           =   -2147483648
-      Indicator       =   ""
-      Left            =   200
-      LockBottom      =   True
-      LockedInPosition=   False
-      LockHorizontal  =   True
-      LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
-      LockVertical    =   False
-      MaximumValue    =   100
-      MinimumValue    =   0
-      PanelIndex      =   0
-      Scope           =   2
-      StepValue       =   1
-      TabIndex        =   5
-      TabStop         =   True
-      Tooltip         =   ""
-      Top             =   360
-      Value           =   0
-      Visible         =   True
-      Width           =   200
-      _mPanelIndex    =   -1
-   End
    Begin EditRoomWebDialog EditRoomDialog
       ControlCount    =   0
       ControlID       =   ""
@@ -254,6 +225,35 @@ Begin WebPage IslandWebPage
       Width           =   600
       _mDesignHeight  =   0
       _mDesignWidth   =   0
+      _mPanelIndex    =   -1
+   End
+   Begin WebSlider ZSlider
+      ControlID       =   ""
+      CSSClasses      =   ""
+      Enabled         =   True
+      Height          =   20
+      Index           =   -2147483648
+      Indicator       =   ""
+      Left            =   200
+      LockBottom      =   True
+      LockedInPosition=   False
+      LockHorizontal  =   True
+      LockLeft        =   False
+      LockRight       =   False
+      LockTop         =   False
+      LockVertical    =   False
+      MaximumValue    =   100
+      MinimumValue    =   0
+      PanelIndex      =   0
+      Scope           =   2
+      StepValue       =   1
+      TabIndex        =   5
+      TabStop         =   True
+      Tooltip         =   ""
+      Top             =   360
+      Value           =   0
+      Visible         =   True
+      Width           =   200
       _mPanelIndex    =   -1
    End
 End
@@ -651,18 +651,6 @@ End
 		End Sub
 	#tag EndEvent
 #tag EndEvents
-#tag Events ZSlider
-	#tag Event
-		Sub ValueChanged()
-		  mZ = Me.Value
-		  RoomsRectangle.Width = 100
-		  RoomsRectangle.Height = 100
-		  RoomsRectangle.Top = 20
-		  RoomsRectangle.Left = 20
-		  Refresh(True)
-		End Sub
-	#tag EndEvent
-#tag EndEvents
 #tag Events EditRoomDialog
 	#tag Event
 		Sub SavePressed()
@@ -682,6 +670,18 @@ End
 		  Next
 		  
 		  Refresh
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events ZSlider
+	#tag Event
+		Sub ValueChanged()
+		  mZ = Me.Value
+		  RoomsRectangle.Width = 100
+		  RoomsRectangle.Height = 100
+		  RoomsRectangle.Top = 20
+		  RoomsRectangle.Left = 20
+		  Refresh(True)
 		End Sub
 	#tag EndEvent
 #tag EndEvents

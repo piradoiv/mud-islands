@@ -96,7 +96,8 @@ Protected Class Island
 		          End If
 		          
 		          Var roomExit As JSONItem = room.Exits.Child(key)
-		          If Not roomExit.HasKey("door") Or roomExit.Value("door") = False Then
+		          Var exitDoor As Variant = roomExit.Lookup("door", Nil)
+		          If exitDoor = Nil Or exitDoor.Type <> Variant.TypeBoolean Or exitDoor.BooleanValue = False Then
 		            Continue
 		          End If
 		          
