@@ -5,7 +5,7 @@ Begin WebContainer DoorEditorContainer
    ControlID       =   ""
    CSSClasses      =   ""
    Enabled         =   True
-   Height          =   418
+   Height          =   464
    Indicator       =   0
    LayoutDirection =   0
    LayoutType      =   0
@@ -44,10 +44,10 @@ Begin WebContainer DoorEditorContainer
       LockVertical    =   False
       PanelIndex      =   0
       Scope           =   2
-      TabIndex        =   0
+      TabIndex        =   1
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   20
+      Top             =   62
       Value           =   False
       Visible         =   True
       Width           =   210
@@ -72,10 +72,10 @@ Begin WebContainer DoorEditorContainer
       LockVertical    =   False
       PanelIndex      =   0
       Scope           =   2
-      TabIndex        =   2
+      TabIndex        =   3
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   116
+      Top             =   158
       Value           =   False
       Visible         =   True
       Width           =   210
@@ -100,10 +100,10 @@ Begin WebContainer DoorEditorContainer
       LockVertical    =   False
       PanelIndex      =   0
       Scope           =   2
-      TabIndex        =   1
+      TabIndex        =   2
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   68
+      Top             =   110
       Value           =   True
       Visible         =   True
       Width           =   210
@@ -128,10 +128,10 @@ Begin WebContainer DoorEditorContainer
       LockVertical    =   False
       PanelIndex      =   0
       Scope           =   2
-      TabIndex        =   5
+      TabIndex        =   6
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   303
+      Top             =   345
       Value           =   True
       Visible         =   True
       Width           =   210
@@ -161,12 +161,12 @@ Begin WebContainer DoorEditorContainer
       PanelIndex      =   0
       ReadOnly        =   False
       Scope           =   2
-      TabIndex        =   3
+      TabIndex        =   4
       TabStop         =   True
       Text            =   ""
       TextAlignment   =   0
       Tooltip         =   ""
-      Top             =   163
+      Top             =   205
       Visible         =   True
       Width           =   210
       _mPanelIndex    =   -1
@@ -193,10 +193,10 @@ Begin WebContainer DoorEditorContainer
       Outlined        =   False
       PanelIndex      =   0
       Scope           =   2
-      TabIndex        =   6
+      TabIndex        =   8
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   360
+      Top             =   406
       Visible         =   True
       Width           =   87
       _mPanelIndex    =   -1
@@ -226,7 +226,7 @@ Begin WebContainer DoorEditorContainer
       TabIndex        =   7
       TabStop         =   True
       Tooltip         =   ""
-      Top             =   360
+      Top             =   406
       Visible         =   True
       Width           =   115
       _mPanelIndex    =   -1
@@ -242,7 +242,7 @@ Begin WebContainer DoorEditorContainer
       Height          =   62
       Hint            =   ""
       Index           =   -2147483648
-      indicator       =   0
+      Indicator       =   0
       Left            =   20
       LockBottom      =   False
       LockedInPosition=   False
@@ -255,12 +255,40 @@ Begin WebContainer DoorEditorContainer
       PanelIndex      =   0
       ReadOnly        =   False
       Scope           =   2
-      TabIndex        =   4
+      TabIndex        =   5
       TabStop         =   True
       Text            =   ""
       TextAlignment   =   0
       Tooltip         =   ""
-      Top             =   233
+      Top             =   275
+      Visible         =   True
+      Width           =   210
+      _mPanelIndex    =   -1
+   End
+   Begin WebCheckbox IsWallCheckbox
+      Caption         =   "Impenetrable Wall"
+      ControlID       =   ""
+      CSSClasses      =   ""
+      Enabled         =   True
+      Height          =   34
+      Indeterminate   =   False
+      Index           =   -2147483648
+      Indicator       =   ""
+      Left            =   20
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockHorizontal  =   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      LockVertical    =   False
+      PanelIndex      =   0
+      Scope           =   2
+      TabIndex        =   0
+      TabStop         =   True
+      Tooltip         =   ""
+      Top             =   20
+      Value           =   False
       Visible         =   True
       Width           =   210
       _mPanelIndex    =   -1
@@ -284,7 +312,8 @@ End
 		    Return
 		  End If
 		  
-		  HasDoorCheckbox.Value = True
+		  IsWallCheckbox.Value = door.IsWall
+		  HasDoorCheckbox.Value = Not door.IsWall
 		  AutoLockCheckbox.Value = door.AutoLock
 		  ClosedCheckbox.Value = door.Closed
 		  LockedCheckbox.Value = door.Locked
@@ -297,7 +326,9 @@ End
 
 	#tag Method, Flags = &h21
 		Private Sub Refresh()
-		  Var enableOthers As Boolean = HasDoorCheckbox.Value
+		  Var enableOthers As Boolean = Not IsWallCheckbox.Value And HasDoorCheckbox.Value
+		  
+		  HasDoorCheckbox.Enabled = Not IsWallCheckbox.Value
 		  
 		  AutoLockCheckbox.Enabled = enableOthers
 		  ClosedCheckbox.Enabled = enableOthers
@@ -319,10 +350,6 @@ End
 		End Sub
 	#tag EndMethod
 
-
-	#tag Hook, Flags = &h0
-		Event CancelPressed()
-	#tag EndHook
 
 	#tag Hook, Flags = &h0
 		Event DoorSaved(door As MUD.Door)
@@ -348,7 +375,7 @@ End
 #tag Events CancelButton
 	#tag Event
 		Sub Pressed()
-		  RaiseEvent CancelPressed
+		  Self.Close
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -357,7 +384,11 @@ End
 		Sub Pressed()
 		  Var door As MUD.Door
 		  
-		  If HasDoorCheckbox.Value Then
+		  If IsWallCheckbox.Value Then
+		    door = New MUD.Door
+		    door.IsWall = True
+		    
+		  ElseIf HasDoorCheckbox.Value Then
 		    door = New MUD.Door
 		    door.AutoLock = AutoLockCheckbox.Value
 		    door.Closed = ClosedCheckbox.Value
@@ -367,6 +398,13 @@ End
 		  End If
 		  
 		  RaiseEvent DoorSaved(door)
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events IsWallCheckbox
+	#tag Event
+		Sub ValueChanged()
+		  Refresh
 		End Sub
 	#tag EndEvent
 #tag EndEvents

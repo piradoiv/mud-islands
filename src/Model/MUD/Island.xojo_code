@@ -75,32 +75,40 @@ Protected Class Island
 		    result.Zones.Add(newZone)
 		  Next
 		  
-		  For Each zone As MUD.Zone In result.Zones
-		    For Each room As MUD.Room In zone.Rooms
-		      If room.Exits = Nil Then
-		        Continue
-		      End If
-		      
-		      Var exitKeys() As String = room.Exits.Keys
-		      For i As Integer = 0 To exitKeys.LastRowIndex
-		        Var key As String = exitKeys(i)
-		        If Not room.Exits.Value(key) IsA JSONItem Then
-		          Continue
-		        End If
-		        
-		        Var roomExit As JSONItem = room.Exits.Child(key)
-		        If Not roomExit.HasKey("door") Or roomExit.Value("door") = False Then
-		          Continue
-		        End If
-		        
-		        Var door As MUD.Door = MUD.Door.FromJSON(room.Exits.Child(key))
-		        Var directions As Dictionary = room.GetDirections
-		        result.SetDoorBetweenRooms(room, MUD.Room(directions.Value(key)), door)
-		      Next
-		      
-		      room.Exits = Nil
+		  If input.HasKey("doors") Then
+		    Var doorsInput As JSONItem = input.Child("doors")
+		    For i As Integer = 0 To doorsInput.LastRowIndex
+		      Var newDoor As MUD.Door = MUD.Door.FromJSON(doorsInput.ValueAt(i))
+		      result.mDoors.Value(newDoor.Key) = newDoor
 		    Next
-		  Next
+		  Else
+		    For Each zone As MUD.Zone In result.Zones
+		      For Each room As MUD.Room In zone.Rooms
+		        If room.Exits = Nil Then
+		          Continue
+		        End If
+		        
+		        Var exitKeys() As String = room.Exits.Keys
+		        For i As Integer = 0 To exitKeys.LastRowIndex
+		          Var key As String = exitKeys(i)
+		          If Not room.Exits.Value(key) IsA JSONItem Then
+		            Continue
+		          End If
+		          
+		          Var roomExit As JSONItem = room.Exits.Child(key)
+		          If Not roomExit.HasKey("door") Or roomExit.Value("door") = False Then
+		            Continue
+		          End If
+		          
+		          Var door As MUD.Door = MUD.Door.FromJSON(room.Exits.Child(key))
+		          Var directions As Dictionary = room.GetDirections
+		          result.SetDoorBetweenRooms(room, MUD.Room(directions.Value(key)), door)
+		        Next
+		        
+		        room.Exits = Nil
+		      Next
+		    Next
+		  End If
 		  
 		  Return result
 		End Function
@@ -224,7 +232,10 @@ Protected Class Island
 		  Var key As String = DoorKeyForRooms(a, b)
 		  
 		  If door = Nil Then
-		    mDoors.Remove(key)
+		    If mDoors.HasKey(key) Then
+		      mDoors.Remove(key)
+		    End If
+		    
 		    Return
 		  End If
 		  
@@ -247,6 +258,12 @@ Protected Class Island
 		    zonesItem.Add(zone.ToJSON)
 		  Next
 		  result.Value("zones") = zonesItem
+		  
+		  Var jsonDoors As New JSONItem("[]")
+		  For Each entry As DictionaryEntry In mDoors
+		    jsonDoors.Add(MUD.Door(entry.Value).ToJSON)
+		  Next
+		  result.Value("doors") = jsonDoors
 		  
 		  Return result
 		End Function

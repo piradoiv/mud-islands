@@ -178,7 +178,7 @@ Begin WebDialog EditRoomWebDialog
          Hint            =   ""
          Index           =   -2147483648
          Indicator       =   ""
-         Left            =   337
+         Left            =   40
          LockBottom      =   False
          LockedInPosition=   False
          LockHorizontal  =   False
@@ -197,7 +197,7 @@ Begin WebDialog EditRoomWebDialog
          Text            =   ""
          TextAlignment   =   0
          Tooltip         =   ""
-         Top             =   86
+         Top             =   169
          Visible         =   True
          Width           =   100
          _mPanelIndex    =   -1
@@ -214,7 +214,7 @@ Begin WebDialog EditRoomWebDialog
          Hint            =   ""
          Index           =   -2147483648
          Indicator       =   0
-         Left            =   337
+         Left            =   156
          LockBottom      =   False
          LockedInPosition=   False
          LockHorizontal  =   False
@@ -250,7 +250,7 @@ Begin WebDialog EditRoomWebDialog
          Hint            =   ""
          Index           =   -2147483648
          Indicator       =   0
-         Left            =   337
+         Left            =   271
          LockBottom      =   False
          LockedInPosition=   False
          LockHorizontal  =   False
@@ -269,202 +269,9 @@ Begin WebDialog EditRoomWebDialog
          Text            =   ""
          TextAlignment   =   0
          Tooltip         =   ""
-         Top             =   252
+         Top             =   169
          Visible         =   True
          Width           =   100
-         _mPanelIndex    =   -1
-      End
-      Begin WebRectangle Rectangle1
-         BackgroundColor =   &cFFFFFF
-         BorderColor     =   &c000000FF
-         BorderThickness =   1
-         ControlCount    =   0
-         ControlID       =   ""
-         CornerSize      =   -1
-         CSSClasses      =   ""
-         Enabled         =   True
-         HasBackgroundColor=   False
-         Height          =   171
-         Index           =   -2147483648
-         Indicator       =   ""
-         LayoutDirection =   "LayoutDirections.LeftToRight"
-         LayoutType      =   "LayoutTypes.Fixed"
-         Left            =   40
-         LockBottom      =   False
-         LockedInPosition=   False
-         LockHorizontal  =   False
-         LockLeft        =   True
-         LockRight       =   False
-         LockTop         =   True
-         LockVertical    =   False
-         PanelIndex      =   1
-         Parent          =   "RoomTabPanel"
-         Scope           =   2
-         TabIndex        =   0
-         TabPanelIndex   =   0
-         TabStop         =   True
-         Tooltip         =   ""
-         Top             =   189
-         Visible         =   True
-         Width           =   251
-         _mDesignHeight  =   0
-         _mDesignWidth   =   0
-         _mPanelIndex    =   -1
-         Begin WebCheckbox AllowedWestCheckbox
-            Caption         =   "West"
-            ControlID       =   ""
-            CSSClasses      =   ""
-            Enabled         =   True
-            Height          =   34
-            Indeterminate   =   False
-            Index           =   -2147483648
-            Indicator       =   0
-            Left            =   68
-            LockBottom      =   False
-            LockedInPosition=   False
-            LockHorizontal  =   False
-            LockLeft        =   True
-            LockRight       =   False
-            LockTop         =   True
-            LockVertical    =   False
-            PanelIndex      =   1
-            Parent          =   "Rectangle1"
-            Scope           =   2
-            TabIndex        =   0
-            TabPanelIndex   =   0
-            TabStop         =   True
-            Tooltip         =   ""
-            Top             =   257
-            Value           =   True
-            Visible         =   True
-            Width           =   100
-            _mPanelIndex    =   -1
-         End
-         Begin WebCheckbox AllowedNorthCheckbox
-            Caption         =   "North"
-            ControlID       =   ""
-            CSSClasses      =   ""
-            Enabled         =   True
-            Height          =   34
-            Indeterminate   =   False
-            Index           =   -2147483648
-            Indicator       =   ""
-            Left            =   133
-            LockBottom      =   False
-            LockedInPosition=   False
-            LockHorizontal  =   False
-            LockLeft        =   True
-            LockRight       =   False
-            LockTop         =   True
-            LockVertical    =   False
-            PanelIndex      =   1
-            Parent          =   "Rectangle1"
-            Scope           =   2
-            TabIndex        =   1
-            TabPanelIndex   =   0
-            TabStop         =   True
-            Tooltip         =   ""
-            Top             =   207
-            Value           =   True
-            Visible         =   True
-            Width           =   100
-            _mPanelIndex    =   -1
-         End
-         Begin WebCheckbox AllowedEastCheckbox
-            Caption         =   "East"
-            ControlID       =   ""
-            CSSClasses      =   ""
-            Enabled         =   True
-            Height          =   34
-            Indeterminate   =   False
-            Index           =   -2147483648
-            Indicator       =   0
-            Left            =   195
-            LockBottom      =   False
-            LockedInPosition=   False
-            LockHorizontal  =   False
-            LockLeft        =   True
-            LockRight       =   False
-            LockTop         =   True
-            LockVertical    =   False
-            PanelIndex      =   1
-            Parent          =   "Rectangle1"
-            Scope           =   2
-            TabIndex        =   2
-            TabPanelIndex   =   0
-            TabStop         =   True
-            Tooltip         =   ""
-            Top             =   257
-            Value           =   True
-            Visible         =   True
-            Width           =   67
-            _mPanelIndex    =   -1
-         End
-         Begin WebCheckbox AllowedSouthCheckbox
-            Caption         =   "South"
-            ControlID       =   ""
-            CSSClasses      =   ""
-            Enabled         =   True
-            Height          =   34
-            Indeterminate   =   False
-            Index           =   -2147483648
-            Indicator       =   0
-            Left            =   133
-            LockBottom      =   False
-            LockedInPosition=   False
-            LockHorizontal  =   False
-            LockLeft        =   True
-            LockRight       =   False
-            LockTop         =   True
-            LockVertical    =   False
-            PanelIndex      =   1
-            Parent          =   "Rectangle1"
-            Scope           =   2
-            TabIndex        =   3
-            TabPanelIndex   =   0
-            TabStop         =   True
-            Tooltip         =   ""
-            Top             =   306
-            Value           =   True
-            Visible         =   True
-            Width           =   100
-            _mPanelIndex    =   -1
-         End
-      End
-      Begin WebLabel Label1
-         Bold            =   False
-         ControlID       =   ""
-         CSSClasses      =   ""
-         Enabled         =   True
-         FontName        =   ""
-         FontSize        =   0.0
-         Height          =   38
-         Index           =   -2147483648
-         Indicator       =   ""
-         Italic          =   False
-         Left            =   42
-         LockBottom      =   False
-         LockedInPosition=   False
-         LockHorizontal  =   False
-         LockLeft        =   True
-         LockRight       =   False
-         LockTop         =   True
-         LockVertical    =   False
-         Multiline       =   False
-         PanelIndex      =   1
-         Parent          =   "RoomTabPanel"
-         Scope           =   2
-         TabIndex        =   0
-         TabPanelIndex   =   0
-         TabStop         =   True
-         Text            =   "Allowed to move"
-         TextAlignment   =   0
-         TextColor       =   &c000000FF
-         Tooltip         =   ""
-         Top             =   154
-         Underline       =   False
-         Visible         =   True
-         Width           =   165
          _mPanelIndex    =   -1
       End
       Begin WebTextArea NPCsTextArea
@@ -573,7 +380,7 @@ Begin WebDialog EditRoomWebDialog
          _mPanelIndex    =   -1
       End
       Begin WebLabel Label2
-         Bold            =   False
+         Bold            =   True
          ControlID       =   ""
          CSSClasses      =   ""
          Enabled         =   True
@@ -670,7 +477,7 @@ Begin WebDialog EditRoomWebDialog
          Tooltip         =   ""
          Top             =   108
          Visible         =   True
-         Width           =   251
+         Width           =   331
          _mPanelIndex    =   -1
       End
       Begin WebLabel Label3
@@ -1066,7 +873,7 @@ Begin WebDialog EditRoomWebDialog
          _mPanelIndex    =   -1
       End
       Begin WebCheckbox HiddenCheckbox
-         Caption         =   "Hidden"
+         Caption         =   "This room is hidden"
          ControlID       =   ""
          CSSClasses      =   ""
          Enabled         =   True
@@ -1074,7 +881,7 @@ Begin WebDialog EditRoomWebDialog
          Indeterminate   =   False
          Index           =   -2147483648
          Indicator       =   ""
-         Left            =   465
+         Left            =   40
          LockBottom      =   False
          LockedInPosition=   False
          LockHorizontal  =   False
@@ -1089,10 +896,10 @@ Begin WebDialog EditRoomWebDialog
          TabPanelIndex   =   0
          TabStop         =   True
          Tooltip         =   ""
-         Top             =   86
+         Top             =   248
          Value           =   False
          Visible         =   True
-         Width           =   203
+         Width           =   187
          _mPanelIndex    =   -1
       End
    End
@@ -1156,37 +963,6 @@ Begin WebDialog EditRoomWebDialog
       Width           =   100
       _mPanelIndex    =   -1
    End
-   Begin DoorEditorWebDialog DoorEditorDialog
-      ControlCount    =   0
-      ControlID       =   ""
-      CSSClasses      =   ""
-      Enabled         =   True
-      Height          =   418
-      Index           =   -2147483648
-      Indicator       =   0
-      LayoutDirection =   0
-      LayoutType      =   0
-      Left            =   0
-      LockBottom      =   False
-      LockedInPosition=   False
-      LockHorizontal  =   False
-      LockLeft        =   False
-      LockRight       =   False
-      LockTop         =   False
-      LockVertical    =   False
-      PanelIndex      =   0
-      Position        =   0
-      Scope           =   2
-      TabIndex        =   14
-      TabStop         =   True
-      Tooltip         =   ""
-      Top             =   0
-      Visible         =   True
-      Width           =   250
-      _mDesignHeight  =   0
-      _mDesignWidth   =   0
-      _mPanelIndex    =   -1
-   End
 End
 #tag EndWebPage
 
@@ -1203,6 +979,7 @@ End
 		  Var anotherRoom As MUD.Room = GetRoomAtDirectionIndex(mEditingDoorIndex)
 		  Room.Zone.Island.SetDoorBetweenRooms(Room, anotherRoom, door)
 		  
+		  sender.Close
 		  RefreshConnectedRooms
 		End Sub
 	#tag EndMethod
@@ -1272,7 +1049,7 @@ End
 		      b.Indicator = WebUIControl.Indicators.Success
 		      For Each door As MUD.Door In doors
 		        If door.RoomIds.IndexOf(r.Id) <> -1 Then
-		          b.Indicator = If(door.Locked, WebUIControl.Indicators.Danger, WebUIControl.Indicators.Warning)
+		          b.Indicator = If(door.IsWall, WebUIControl.Indicators.Danger, WebUIControl.Indicators.Warning)
 		        End If
 		      Next
 		    Else
@@ -1347,23 +1124,24 @@ End
 #tag Events ConnectedRoomsButtons
 	#tag Event
 		Sub Pressed(index as Integer)
-		  // mEditingDoorIndex = index
-		  // 
-		  // Var existingDoor As MUD.Door = Room.Zone.Island.GetDoorBetweenRooms(Room, GetRoomAtDirectionIndex(index))
-		  // 
-		  // Var c As New DoorEditorContainer
-		  // c.LoadDoor(existingDoor)
-		  // AddHandler c.DoorSaved, WeakAddressOf DoorSavedHandler
-		  // c.ShowPopover(Me)
-		  // 
-		  // mDoorEditorContainer = c
-		  
-		  
-		  mEditingDoorIndex = index
-		  
-		  Var existingDoor As MUD.Door = Room.Zone.Island.GetDoorBetweenRooms(Room, GetRoomAtDirectionIndex(index))
-		  DoorEditorDialog.LoadDoor(existingDoor)
-		  DoorEditorDialog.Show
+		  #If True
+		    mEditingDoorIndex = index
+		    
+		    Var existingDoor As MUD.Door = Room.Zone.Island.GetDoorBetweenRooms(Room, GetRoomAtDirectionIndex(index))
+		    
+		    Var c As New DoorEditorContainer
+		    c.LoadDoor(existingDoor)
+		    AddHandler c.DoorSaved, WeakAddressOf DoorSavedHandler
+		    c.ShowPopover(Me)
+		    
+		    mDoorEditorContainer = c
+		  #Else
+		    mEditingDoorIndex = index
+		    
+		    Var existingDoor As MUD.Door = Room.Zone.Island.GetDoorBetweenRooms(Room, GetRoomAtDirectionIndex(index))
+		    DoorEditorDialog.LoadDoor(existingDoor)
+		    DoorEditorDialog.Show
+		  #EndIf
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -1411,16 +1189,6 @@ End
 	#tag Event
 		Sub Pressed()
 		  Self.Close
-		End Sub
-	#tag EndEvent
-#tag EndEvents
-#tag Events DoorEditorDialog
-	#tag Event
-		Sub DoorSaved(door As MUD.Door)
-		  Var anotherRoom As MUD.Room = GetRoomAtDirectionIndex(mEditingDoorIndex)
-		  Room.Zone.Island.SetDoorBetweenRooms(Room, anotherRoom, door)
-		  
-		  RefreshConnectedRooms
 		End Sub
 	#tag EndEvent
 #tag EndEvents

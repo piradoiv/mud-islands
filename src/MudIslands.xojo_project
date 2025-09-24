@@ -21,7 +21,6 @@ Class=Map;Model/MUD/Map.xojo_code;&h00000000747BCFFF;&h00000000464917FF;false
 WebView=EditFieldWebDialog;EditFieldWebDialog.xojo_code;&h0000000067A60FFF;&h0000000000000000;false
 WebContainer=IslandRoomContainer;IslandRoomContainer.xojo_code;&h000000007D33CFFF;&h0000000000000000;false
 WebContainer=IslandAddRoomContainer;IslandAddRoomContainer.xojo_code;&h0000000043B157FF;&h0000000000000000;false
-WebView=DoorEditorWebDialog;DoorEditorWebDialog.xojo_code;&h000000002C3457FF;&h0000000000000000;false
 WebContainer=DoorEditorContainer;DoorEditorContainer.xojo_code;&h000000001A8C97FF;&h0000000000000000;false
 Folder=Colors;Colors;&h000000007DE937FF;&h0000000000000000;false
 ColorAsset=BorderColorGroup;Colors/BorderColorGroup.xojo_color;&h0000000011A28FFF;&h000000007DE937FF;false

@@ -420,57 +420,33 @@ End
 		  
 		  Var directions As Dictionary = Room.GetDirections
 		  For Each entry As DictionaryEntry In directions
+		    Var door As MUD.Door = island.GetDoorBetweenRooms(Room, MUD.Room(entry.Value))
+		    If door = Nil Then
+		      Continue
+		    End If
+		    
+		    g.DrawingColor = If(door.IsWall, ColorGroup.NamedColor("danger"), TextBodyColorGroup)
 		    Select Case entry.Key
 		    Case "north"
-		      Var door As MUD.Door = island.GetDoorBetweenRooms(Room, MUD.Room(entry.Value))
-		      If door <> Nil Then
-		        g.FillRectangle(g.Width / 2 - d / 2, -(d / 2), d, d)
-		      End If
+		      g.FillRectangle(g.Width / 2 - d / 2, -(d / 2), d, d)
 		    Case "south"
-		      Var door As MUD.Door = island.GetDoorBetweenRooms(Room, MUD.Room(entry.Value))
-		      If door <> Nil Then
-		        g.FillRectangle(g.Width / 2 - d / 2, g.Height - d / 2, d, d)
-		      End If
+		      g.FillRectangle(g.Width / 2 - d / 2, g.Height - d / 2, d, d)
 		    Case "east"
-		      Var door As MUD.Door = island.GetDoorBetweenRooms(Room, MUD.Room(entry.Value))
-		      If door <> Nil Then
-		        g.FillRectangle(g.Width - d / 2, g.Height / 2 - d / 2, d, d)
-		      End If
+		      g.FillRectangle(g.Width - d / 2, g.Height / 2 - d / 2, d, d)
 		    Case "west"
-		      Var door As MUD.Door = island.GetDoorBetweenRooms(Room, MUD.Room(entry.Value))
-		      If door <> Nil Then
-		        g.FillRectangle(-(d / 2), g.Height / 2 - d / 2, d, d)
-		      End If
+		      g.FillRectangle(-(d / 2), g.Height / 2 - d / 2, d, d)
 		    Case "up"
-		      Var door As MUD.Door = island.GetDoorBetweenRooms(Room, MUD.Room(entry.Value))
-		      If door <> Nil Then
-		        g.FillRectangle(g.Width / 2 - d / 2, g.Height / 2 - d / 2, d, d)
-		      End If
+		      g.FillRectangle(g.Width / 2 - d / 2, g.Height / 2 - d / 2, d, d)
 		    Case "down"
-		      Var door As MUD.Door = island.GetDoorBetweenRooms(Room, MUD.Room(entry.Value))
-		      If door <> Nil Then
-		        g.FillRectangle(g.Width / 2 - d / 2, g.Height / 2 - d / 2, d, d)
-		      End If
+		      g.FillRectangle(g.Width / 2 - d / 2, g.Height / 2 - d / 2, d, d)
 		    Case "northwest"
-		      Var door As MUD.Door = island.GetDoorBetweenRooms(Room, MUD.Room(entry.Value))
-		      If door <> Nil Then
-		        g.FillRectangle(-(d / 2), -(d / 2), d, d)
-		      End If
+		      g.FillRectangle(-(d / 2), -(d / 2), d, d)
 		    Case "northeast"
-		      Var door As MUD.Door = island.GetDoorBetweenRooms(Room, MUD.Room(entry.Value))
-		      If door <> Nil Then
-		        g.FillRectangle(g.Width - d / 2, -(d / 2), d, d)
-		      End If
+		      g.FillRectangle(g.Width - d / 2, -(d / 2), d, d)
 		    Case "southwest"
-		      Var door As MUD.Door = island.GetDoorBetweenRooms(Room, MUD.Room(entry.Value))
-		      If door <> Nil Then
-		        g.FillRectangle(-(d / 2), g.Height - d / 2, d, d)
-		      End If
+		      g.FillRectangle(-(d / 2), g.Height - d / 2, d, d)
 		    Case "southeast"
-		      Var door As MUD.Door = island.GetDoorBetweenRooms(Room, MUD.Room(entry.Value))
-		      If door <> Nil Then
-		        g.FillRectangle(g.Width - d / 2, g.Height - d / 2, d, d)
-		      End If
+		      g.FillRectangle(g.Width - d / 2, g.Height - d / 2, d, d)
 		    End Select
 		  Next
 		End Sub

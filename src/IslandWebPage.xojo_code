@@ -377,6 +377,8 @@ End
 		  Var offsetX As Integer = (0 - minX) * testContainer.Width
 		  Var offsetY As Integer = (0 - minY) * testContainer.Height
 		  
+		  testContainer.Close
+		  
 		  For i As Integer = 0 To rooms.LastIndex
 		    Var room As MUD.Room = rooms(i)
 		    Var c As IslandRoomContainer
@@ -450,7 +452,19 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
-		Private Sub Refresh()
+		Private Sub Refresh(fullRefresh As Boolean = False)
+		  If fullRefresh Then
+		    mEmptyRoomContainers.RemoveAll
+		    mRoomContainers.RemoveAll
+		    For Each ctl As WebUIControl In Controls
+		      If ctl IsA IslandAddRoomContainer Or ctl IsA IslandRoomContainer Then
+		        ctl.Close
+		      End If
+		    Next
+		    
+		    ExecuteJavaScript("document.getElementById('" + RoomsRectangle.ControlID + "').scrollTo(0, 0)")
+		  End If
+		  
 		  Var zonesButton As WebToolbarItem = MainToolbar.ItemWithTag("zone")
 		  If zonesButton <> Nil And Island <> Nil Then
 		    zonesButton.Caption = "Zones (" + Island.Zones.Count.ToString + ")"
@@ -521,7 +535,7 @@ End
 			  mIsland = value
 			  Title = value.Name
 			  mCurrentZoneIndex = If(value = Nil Or value.Zones.Count = 0, -1, 0)
-			  Refresh
+			  Refresh(True)
 			End Set
 		#tag EndSetter
 		Island As MUD.Island
@@ -608,8 +622,10 @@ End
 		    End Select
 		    
 		  Case "zone"
-		    mCurrentZoneIndex = hitItem.Tag
-		    Refresh
+		    If mCurrentZoneIndex <> hitItem.Tag Then
+		      mCurrentZoneIndex = hitItem.Tag
+		      Refresh(True)
+		    End If
 		  End Select
 		End Sub
 	#tag EndEvent
@@ -624,7 +640,7 @@ End
 		  
 		  Island.Zones.Add(newZone)
 		  mCurrentZoneIndex = Island.Zones.LastIndex
-		  Refresh
+		  Refresh(True)
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -643,7 +659,7 @@ End
 		  RoomsRectangle.Height = 100
 		  RoomsRectangle.Top = 20
 		  RoomsRectangle.Left = 20
-		  Refresh
+		  Refresh(True)
 		End Sub
 	#tag EndEvent
 #tag EndEvents

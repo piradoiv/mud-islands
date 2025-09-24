@@ -102,8 +102,14 @@ Protected Class Room
 		    
 		    Var roomExit As New JSONItem
 		    roomExit.Value("room") = r.Id
+		    Var isWall As Boolean = False
 		    For Each door As MUD.Door In doors
 		      If door.RoomIds.IndexOf(r.Id) <> -1 And door.RoomIds.IndexOf(Self.Id) <> -1 Then
+		        If door.IsWall Then
+		          isWall = True
+		          Exit
+		        End If
+		        
 		        roomExit.Value("door") = True
 		        roomExit.Value("locked") = door.Locked
 		        roomExit.Value("closed") = door.Closed
@@ -113,7 +119,9 @@ Protected Class Room
 		      End If
 		    Next
 		    
-		    exitsItem.Value(directionKey) = roomExit
+		    If Not isWall Then
+		      exitsItem.Value(directionKey) = roomExit
+		    End If
 		  Next
 		  
 		  result.Value("exits") = exitsItem
@@ -309,6 +317,14 @@ Protected Class Room
 			Group="Behavior"
 			InitialValue=""
 			Type="Integer"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="IsHidden"
+			Visible=false
+			Group="Behavior"
+			InitialValue="False"
+			Type="Boolean"
 			EditorType=""
 		#tag EndViewProperty
 	#tag EndViewBehavior
