@@ -65,10 +65,9 @@ Protected Class Zone
 	#tag Method, Flags = &h0
 		Function ZoneColor() As Color
 		  Var zoneIndex As Integer = Island.Zones.IndexOf(Self)
+		  Var hue As Double = (1 / Island.Zones.Count) * zoneIndex
 		  
-		  Var typeIndex As Integer = Integer(Self.Type)
-		  Var hue As Double = Abs(Sin(0.6 + typeIndex))
-		  Return Color.HSV(hue, 1, 1)
+		  Return Color.HSV(hue, .8, .8)
 		End Function
 	#tag EndMethod
 
