@@ -56,12 +56,6 @@ End
 
 #tag WindowCode
 	#tag Event
-		Sub Opening()
-		  Refresh
-		End Sub
-	#tag EndEvent
-
-	#tag Event
 		Sub Resized()
 		  Refresh
 		End Sub
@@ -74,6 +68,7 @@ End
 		  newIsland.Id = name.Lowercase.ReplaceAll(" ", "-")
 		  newIsland.Name = name
 		  Session.Map.Islands.Add(newIsland)
+		  Session.SaveMap
 		  Refresh
 		End Sub
 	#tag EndMethod
@@ -102,6 +97,10 @@ End
 		  Var HalfPi As Double = PI / 2
 		  
 		  Var center As New Point(Session.ClientWidth / 2, Session.ClientHeight / 2)
+		  
+		  If Session.Map = Nil Then
+		    Return
+		  End If
 		  
 		  Var amount As Integer = Session.Map.Islands.Count
 		  Var degPerIsland As Double = PI2 / amount
@@ -142,8 +141,8 @@ End
 		Private mIslands() As MapIslandContainer
 	#tag EndProperty
 
-	#tag Property, Flags = &h0
-		mPositions() As Point
+	#tag Property, Flags = &h21
+		Private mPositions() As Point
 	#tag EndProperty
 
 
@@ -154,6 +153,11 @@ End
 		Sub Paint(g As WebGraphics)
 		  Const PI = 3.14159265
 		  Const d = 30
+		  
+		  If Session.Map = Nil Then
+		    Return
+		  End If
+		  
 		  Var PI2 As Double = PI * 2
 		  Var HalfPi As Double = PI / 2
 		  

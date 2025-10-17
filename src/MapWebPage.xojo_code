@@ -167,6 +167,13 @@ End
 	#tag EndEvent
 
 
+	#tag Method, Flags = &h0
+		Sub Refresh()
+		  MyMap.Refresh
+		End Sub
+	#tag EndMethod
+
+
 	#tag Property, Flags = &h21
 		Private mExportFile As WebFile
 	#tag EndProperty
@@ -189,8 +196,14 @@ End
 		Sub Opening()
 		  Me.Icon = modernmudlogo
 		  
+		  Me.AddItem(New WebToolbarButton("Start a new map"))
+		  Me.ItemAt(Me.LastItemIndex).Tag = "new"
+		  
 		  Me.AddItem(New WebToolbarButton("Create Island"))
 		  Me.ItemAt(Me.LastItemIndex).Tag = "create_island"
+		  
+		  Me.AddItem(New WebToolbarButton("Save"))
+		  Me.ItemAt(Me.LastItemIndex).Tag = "save"
 		  
 		  Me.AddItem(New WebToolbarButton("Import"))
 		  Me.ItemAt(Me.LastItemIndex).Tag = "import"
@@ -202,8 +215,19 @@ End
 	#tag Event
 		Sub Pressed(item As WebToolbarButton)
 		  Select Case item.Tag
+		  Case "new"
+		    Session.RemoveData("current_map")
+		    Session.Map = New MUD.Map
+		    MyMap.Refresh
 		  Case "create_island"
 		    NewIslandNameWebDialog.Show
+		  Case "save"
+		    If Session.Map = Nil Then
+		      MessageBox("Nothing to save =(")
+		      Return
+		    End If
+		    Session.SaveMap
+		    MessageBox("The map has been saved in your browser")
 		  Case "import"
 		    ImportMapDialog.Show
 		  Case "export"
@@ -229,6 +253,7 @@ End
 	#tag Event
 		Sub ImportMap(mapJSON As JSONItem)
 		  Session.Map = MUD.Map.FromJSON(mapJSON)
+		  Session.SaveMap
 		  MyMap.Refresh
 		End Sub
 	#tag EndEvent

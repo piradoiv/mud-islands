@@ -11,9 +11,45 @@ Inherits WebSession
 #tag EndSession
 	#tag Event
 		Sub Opening()
-		  Map = MUD.Map.FromJSON(New JSONItem(kExampleInput))
+		  RequestData("current_map")
 		End Sub
 	#tag EndEvent
+
+	#tag Event
+		Sub RequestedData(key As String, value As String)
+		  Select Case key
+		  Case "current_map"
+		    Try
+		      Var decodedHex As MemoryBlock = DecodeHex(value)
+		      Var serializedMap As String = decodedHex.Decompress
+		      Map = MUD.Map.FromJSON(New JSONItem(serializedMap))
+		      If Session.CurrentPage IsA MapWebPage Then
+		        MapWebPage(Session.CurrentPage).Refresh
+		      End If
+		    Catch ex As JSONException
+		      Map = New MUD.Map
+		      Return
+		    End Try
+		  End Select
+		End Sub
+	#tag EndEvent
+
+	#tag Event
+		Function UnhandledException(error As RuntimeException) As Boolean
+		  Break
+		End Function
+	#tag EndEvent
+
+
+	#tag Method, Flags = &h0
+		Sub SaveMap()
+		  If Session.Map <> Nil Then
+		    Var serializedMap As MemoryBlock = Session.Map.ToJSON.ToString
+		    Var compressedMap As String = EncodeHex(serializedMap.Compress(MemoryBlock.CompressionLevels.Best))
+		    Session.RecordData("current_map", compressedMap)
+		  End If
+		End Sub
+	#tag EndMethod
 
 
 	#tag Property, Flags = &h0

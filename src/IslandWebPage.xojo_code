@@ -301,6 +301,8 @@ End
 		  sender.Close
 		  
 		  Refresh
+		  
+		  Session.SaveMap
 		End Sub
 	#tag EndMethod
 
@@ -515,10 +517,6 @@ End
 		  Var east As Boolean = Island.RoomExists(x + 1, y, mZ)
 		  Var west As Boolean = Island.RoomExists(x - 1, y, mZ)
 		  
-		  If room.Id = "zzzz" Then
-		    Break
-		  End If
-		  
 		  c.SetBorders(north, south, east, west)
 		End Sub
 	#tag EndMethod
@@ -638,6 +636,8 @@ End
 		  Island.Zones.Add(newZone)
 		  mCurrentZoneIndex = Island.Zones.LastIndex
 		  Refresh(True)
+		  
+		  Session.SaveMap
 		End Sub
 	#tag EndEvent
 #tag EndEvents
@@ -652,6 +652,8 @@ End
 	#tag Event
 		Sub SavePressed()
 		  Refresh
+		  
+		  Session.SaveMap
 		End Sub
 	#tag EndEvent
 	#tag Event
@@ -667,6 +669,8 @@ End
 		  Next
 		  
 		  Refresh
+		  
+		  Session.SaveMap
 		End Sub
 	#tag EndEvent
 #tag EndEvents

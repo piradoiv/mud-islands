@@ -48,7 +48,7 @@ Begin WebDialog EditRoomWebDialog
       PanelCount      =   2
       PanelIndex      =   0
       Scope           =   2
-      SelectedPanelIndex=   3
+      SelectedPanelIndex=   2
       TabDefinition   =   "ID\rPosition\rEntities\rConnected Rooms\rDelete"
       TabIndex        =   0
       TabStop         =   True
@@ -978,6 +978,7 @@ End
 		Private Sub DoorSavedHandler(sender As DoorEditorContainer, door As MUD.Door)
 		  Var anotherRoom As MUD.Room = GetRoomAtDirectionIndex(mEditingDoorIndex)
 		  Room.Zone.Island.SetDoorBetweenRooms(Room, anotherRoom, door)
+		  Session.SaveMap
 		  
 		  sender.Close
 		  RefreshConnectedRooms

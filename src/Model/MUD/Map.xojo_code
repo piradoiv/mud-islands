@@ -5,6 +5,10 @@ Protected Class Map
 		  // input = New JSONItem(kExampleInput)
 		  
 		  Var result As New MUD.Map
+		  If Not input.HasKey("islands") Then
+		    Return result
+		  End If
+		  
 		  Var islands As JSONItem = input.Value("islands")
 		  For i As Integer = 0 To islands.LastRowIndex
 		    result.Islands.Add(MUD.Island.FromJSON(islands.ValueAt(i)))
