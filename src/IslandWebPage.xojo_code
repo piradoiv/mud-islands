@@ -587,7 +587,6 @@ End
 		  create.Style = WebToolbarButton.ButtonStyles.Menu
 		  Var createMenu As New WebMenuItem
 		  createMenu.AddMenuItem(New WebMenuItem("Zone", "create_zone"))
-		  createMenu.AddMenuItem(New WebMenuItem("Room", "create_room"))
 		  create.Menu = createMenu
 		  Me.AddItem(create)
 		  Me.ItemAt(Me.LastItemIndex).Tag = "create"
@@ -617,8 +616,6 @@ End
 		    Select Case hitItem.Tag
 		    Case "create_zone"
 		      CreateZoneNameWebDialog.Show
-		    Case "create_room"
-		      MessageBox("Not implemented 🙃")
 		    End Select
 		    
 		  Case "zone"
