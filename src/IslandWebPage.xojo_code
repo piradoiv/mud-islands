@@ -394,7 +394,7 @@ End
 		    End If
 		    
 		    c.Room = room
-		    c.HasLadder = Island.RoomHasLadders(room.X, room.Y, room.Z)
+		    c.HasLadder = Island.RoomHasLadders(room)
 		    SetBorders(c)
 		    grid.Value(room.X.ToString + "-" + room.Y.ToString) = True
 		  Next

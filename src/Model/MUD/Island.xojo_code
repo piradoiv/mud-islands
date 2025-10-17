@@ -211,13 +211,15 @@ Protected Class Island
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function RoomHasLadders(x As Integer, y As Integer, z As Integer) As Boolean
-		  For Each zone As MUD.Zone In Zones
-		    For Each room As MUD.Room In zone.Rooms
-		      If room.X = x And room.Y = y And (room.Z = z - 1 Or room.Z = z + 1) Then
-		        Return True
-		      End If
-		    Next
+		Function RoomHasLadders(room As MUD.Room) As Boolean
+		  Var upAndDownDoors() As MUD.Door = Array(_
+		  Island.GetDoorBetweenRooms(room, Island.RoomAt(room.X, room.Y, room.Z + 1)), _
+		  Island.GetDoorBetweenRooms(room, Island.RoomAt(room.X, room.Y, room.Z - 1)))
+		  
+		  For Each door As MUD.Door In upAndDownDoors
+		    If door <> Nil Then
+		      Return True
+		    End If
 		  Next
 		  
 		  Return False
