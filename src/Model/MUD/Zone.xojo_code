@@ -76,9 +76,11 @@ Protected Class Zone
 		  Var minZ As Integer
 		  Var maxZ As Integer
 		  
-		  For Each room As MUD.Room In Rooms
-		    minZ = Min(minZ, room.Z)
-		    maxZ = Max(maxZ, room.Z)
+		  For Each islandZone As MUD.Zone In Island.Zones
+		    For Each room As MUD.Room In islandZone.Rooms
+		      minZ = Min(minZ, room.Z)
+		      maxZ = Max(maxZ, room.Z)
+		    Next
 		  Next
 		  
 		  Return minZ : maxZ
