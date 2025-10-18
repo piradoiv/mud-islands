@@ -25,7 +25,6 @@ Begin WebDialog ImportMapWebDialog
    Width           =   408
    _mDesignHeight  =   0
    _mDesignWidth   =   0
-   _mName          =   ""
    _mPanelIndex    =   -1
    Begin WebLabel TitleLabel
       Bold            =   False
