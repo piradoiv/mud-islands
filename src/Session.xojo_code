@@ -10,12 +10,6 @@ Inherits WebSession
   SendEventsInBatches=True
 #tag EndSession
 	#tag Event
-		Sub Opening()
-		  RequestData("current_map")
-		End Sub
-	#tag EndEvent
-
-	#tag Event
 		Sub RequestedData(key As String, value As String)
 		  Select Case key
 		  Case "current_map"
@@ -40,6 +34,12 @@ Inherits WebSession
 		End Function
 	#tag EndEvent
 
+
+	#tag Method, Flags = &h0
+		Sub RequestMapFromBrowser()
+		  RequestData("current_map")
+		End Sub
+	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Sub SaveMap()

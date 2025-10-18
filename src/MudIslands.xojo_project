@@ -8,6 +8,7 @@ Folder=Model;Model;&h000000004A298FFF;&h0000000000000000;false
 WebView=MapWebPage;MapWebPage.xojo_code;&h00000000562A27FF;&h0000000000000000;false
 WebContainer=MapIslandContainer;MapIslandContainer.xojo_code;&h00000000013D5FFF;&h0000000000000000;false
 WebContainer=MapContainer;MapContainer.xojo_code;&h0000000058CA7FFF;&h0000000000000000;false
+Class=ConfirmWebMessageDialog;ConfirmWebMessageDialog.xojo_code;&h0000000069F527FF;&h0000000000000000;false
 WebView=ImportMapWebDialog;ImportMapWebDialog.xojo_code;&h0000000009691FFF;&h0000000000000000;false
 WebView=IslandWebPage;IslandWebPage.xojo_code;&h00000000423AC7FF;&h0000000000000000;false
 WebView=EditRoomWebDialog;EditRoomWebDialog.xojo_code;&h0000000009EFB7FF;&h0000000000000000;false

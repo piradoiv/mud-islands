@@ -156,12 +156,36 @@ Begin WebPage MapWebPage
       _mDesignWidth   =   0
       _mPanelIndex    =   -1
    End
+   Begin ConfirmWebMessageDialog ConfirmMessageDialog
+      ControlID       =   ""
+      CSSClasses      =   ""
+      Enabled         =   True
+      Explanation     =   ""
+      Index           =   -2147483648
+      Indicator       =   ""
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockHorizontal  =   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      LockVertical    =   False
+      Message         =   ""
+      PanelIndex      =   0
+      Scope           =   2
+      TabIndex        =   4
+      TabStop         =   True
+      Title           =   ""
+      Tooltip         =   ""
+      _mPanelIndex    =   -1
+   End
 End
 #tag EndWebPage
 
 #tag WindowCode
 	#tag Event
 		Sub Opening()
+		  Session.RequestMapFromBrowser
 		  Me.Style.BackgroundColor = WaterColorGroup
 		End Sub
 	#tag EndEvent
@@ -196,7 +220,7 @@ End
 		Sub Opening()
 		  Me.Icon = modernmudlogo
 		  
-		  Me.AddItem(New WebToolbarButton("Start a new map"))
+		  Me.AddItem(New WebToolbarButton("New map"))
 		  Me.ItemAt(Me.LastItemIndex).Tag = "new"
 		  
 		  Me.AddItem(New WebToolbarButton("Create Island"))
@@ -216,9 +240,7 @@ End
 		Sub Pressed(item As WebToolbarButton)
 		  Select Case item.Tag
 		  Case "new"
-		    Session.RemoveData("current_map")
-		    Session.Map = New MUD.Map
-		    MyMap.Refresh
+		    ConfirmMessageDialog.Show
 		  Case "create_island"
 		    NewIslandNameWebDialog.Show
 		  Case "save"
@@ -255,6 +277,17 @@ End
 		  Session.Map = MUD.Map.FromJSON(mapJSON)
 		  Session.SaveMap
 		  MyMap.Refresh
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events ConfirmMessageDialog
+	#tag Event
+		Sub ButtonPressed(button As WebMessageDialogButton)
+		  If button.Default Then
+		    Session.RemoveData("current_map")
+		    Session.Map = New MUD.Map
+		    MyMap.Refresh
+		  End If
 		End Sub
 	#tag EndEvent
 #tag EndEvents
