@@ -448,8 +448,6 @@ End
 	#tag Method, Flags = &h21
 		Private Sub GoToMap()
 		  Self.Close
-		  Var page As New MapWebPage
-		  page.Show
 		End Sub
 	#tag EndMethod
 

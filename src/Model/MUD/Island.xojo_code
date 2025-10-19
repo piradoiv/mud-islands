@@ -78,7 +78,7 @@ Protected Class Island
 		  If input.HasKey("doors") Then
 		    Var doorsInput As JSONItem = input.Child("doors")
 		    For i As Integer = 0 To doorsInput.LastRowIndex
-		      Var newDoor As MUD.Door = MUD.Door.FromJSON(doorsInput.ValueAt(i))
+		      Var newDoor As MUD.Door = MUD.Door.FromJSON(result, doorsInput.ValueAt(i))
 		      result.mDoors.Value(newDoor.Key) = newDoor
 		    Next
 		  Else
@@ -101,7 +101,7 @@ Protected Class Island
 		            Continue
 		          End If
 		          
-		          Var door As MUD.Door = MUD.Door.FromJSON(room.Exits.Child(key))
+		          Var door As MUD.Door = MUD.Door.FromJSON(result, room.Exits.Child(key))
 		          Var directions As Dictionary = room.GetDirections
 		          result.SetDoorBetweenRooms(room, MUD.Room(directions.Value(key)), door)
 		        Next
@@ -242,9 +242,7 @@ Protected Class Island
 		    Return
 		  End If
 		  
-		  door.RoomIds.RemoveAll
-		  door.RoomIds.Add(a.Id)
-		  door.RoomIds.Add(b.Id)
+		  door.SetRooms(a, b)
 		  mDoors.Value(key) = door
 		End Sub
 	#tag EndMethod

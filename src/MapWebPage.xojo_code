@@ -173,8 +173,6 @@ Begin WebPage MapWebPage
       Message         =   ""
       PanelIndex      =   0
       Scope           =   2
-      TabIndex        =   4
-      TabStop         =   True
       Title           =   ""
       Tooltip         =   ""
       _mPanelIndex    =   -1
@@ -208,7 +206,6 @@ End
 #tag Events MyMap
 	#tag Event
 		Sub IslandPressed(container As MapIslandContainer)
-		  Self.Close
 		  Var islandPage As New IslandWebPage
 		  islandPage.Island = container.Island
 		  islandPage.Show

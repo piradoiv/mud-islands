@@ -33,7 +33,7 @@ Protected Class Door
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Shared Function FromJSON(input As JSONItem) As MUD.Door
+		Shared Function FromJSON(island As MUD.Island, input As JSONItem) As MUD.Door
 		  Var result As New MUD.Door
 		  
 		  result.IsWall = input.Lookup("is_wall", False)
@@ -42,6 +42,20 @@ Protected Class Door
 		  result.KeyId = input.Lookup("key_id", "")
 		  result.Locked = input.Lookup("locked", False)
 		  result.LockMessage = input.Lookup("lock_message", False)
+		  
+		  Var rooms As JSONItem = input.Lookup("rooms", New JSONItem)
+		  For i As Integer = 0 To rooms.LastRowIndex
+		    Var roomPos As JSONItem = rooms.ChildAt(i)
+		    If Not roomPos.HasKey("x") Or Not roomPos.HasKey("y") Or Not roomPos.HasKey("z") Then
+		      Continue
+		    End If
+		    
+		    Var room As MUD.Room = island.RoomAt(roomPos.Value("x").IntegerValue, roomPos.Value("y").IntegerValue, roomPos.Value("z").IntegerValue)
+		    If room <> Nil Then
+		      result.RoomIds.Add(room.Id)
+		      result.mRooms.Add(New WeakRef(room))
+		    End If
+		  Next
 		  
 		  Return result
 		End Function
@@ -58,6 +72,18 @@ Protected Class Door
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Sub SetRooms(a As MUD.Room, b As MUD.Room)
+		  RoomIds.RemoveAll
+		  RoomIds.Add(a.Id)
+		  RoomIds.Add(b.Id)
+		  
+		  mRooms.RemoveAll
+		  mRooms.Add(New WeakRef(a))
+		  mRooms.Add(New WeakRef(b))
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Function ToJSON() As JSONItem
 		  Var result As New JSONItem
 		  
@@ -68,6 +94,19 @@ Protected Class Door
 		  result.Value("key_id") = KeyId
 		  result.Value("lock_message") = LockMessage
 		  result.Value("auto_lock") = AutoLock
+		  
+		  Var rooms As New JSONItem("[]")
+		  For Each roomRef As WeakRef In mRooms
+		    If roomRef <> Nil And roomRef.Value <> Nil Then
+		      Var room As MUD.Room = MUD.Room(roomRef.Value)
+		      Var roomPos As New JSONItem
+		      roomPos.Value("x") = room.X
+		      roomPos.Value("y") = room.Y
+		      roomPos.Value("z") = room.Z
+		      rooms.Add(roomPos)
+		    End If
+		  Next
+		  result.Value("rooms") = rooms
 		  
 		  Return result
 		End Function
